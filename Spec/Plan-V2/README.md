@@ -66,6 +66,14 @@ Não reconstruir retroativamente.
 
 Se existir um ficheiro de prompt criado pelo próprio Qwen, preservá-lo separadamente e registar o path.
 
+## Consolidated View
+
+For convenient reading, the complete Plan-V2 has also been consolidated into:
+
+`V2.md`
+
+This document does not replace or modify the original 26-file snapshot.
+
 ## Preservation Rule
 
 Plan-V2 é um snapshot histórico independente.

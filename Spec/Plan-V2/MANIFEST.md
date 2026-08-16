@@ -69,9 +69,12 @@ Note: the snapshot commit hash is recorded in the repository history rather than
 
 ## Consolidated Document
 
-An auxiliary convenience document will be added for reading. It is **not** part of the 26-file Qwen output
+An auxiliary convenience document was added for reading. It is **not** part of the 26-file Qwen output
 and does not modify it.
 
 - Consolidated convenience document: `Spec/Plan-V2/V2.md`
+  - Lines: 4,144
+  - Bytes: 278,619
+  - SHA-256: `7249EA9DA4EE29BA7D4FF818E4BC471F20E74B7E5E46B8332A1E8F7864EB26E1`
 
 The file hashes and counts above describe only the original Qwen output and are unchanged.
