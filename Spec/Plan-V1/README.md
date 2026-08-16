@@ -54,6 +54,14 @@ The run reported:
 
 These are provenance statements from the Qwen run, not conclusions independently verified by this archive operation.
 
+## Consolidated View
+
+For convenient reading, the complete Plan-V1 has also been consolidated into:
+
+`V1.md`
+
+This document does not replace or modify the original 26-file snapshot.
+
 ## Preservation Rule
 
 Plan-V1 is immutable historical evidence.

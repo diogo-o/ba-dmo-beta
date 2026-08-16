@@ -60,3 +60,12 @@ Per-file size (bytes) and SHA-256 of the archived output, byte-for-byte identica
 Git commit: see repository history
 
 Note: the snapshot commit hash is recorded in the repository history rather than embedded here to avoid a self-referential edit cycle over an already-created commit. The SHA is reported in the archival run's final report.
+
+## Consolidated Document
+
+An auxiliary convenience document was added for reading. It is **not** part of the 26-file Qwen output
+and does not modify it.
+
+- Consolidated convenience document: `Spec/Plan-V1/V1.md`
+
+The file hashes and counts above describe only the original Qwen output and are unchanged.
