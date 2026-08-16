@@ -273,7 +273,7 @@ Esta tabela completa o inventário anterior. O comportamento de estado continua 
 | List | selecionar/abrir itens com layout flexível | dados que exigem comparação por colunas |
 | List Row | clique seleciona; duplo abre | comando imediato sem estado de seleção |
 | Table | ordenar/filtrar/paginar dados tabulares | cartões sem relação colunar |
-| Table Row | clique seleciona; duplo abre; keyboard equivalente | inserir vários botões repetidos de abertura |
+| Table Row | clique seleciona; duplo abre (sem atalho de teclado específico do BA DMO) | inserir vários botões repetidos de abertura |
 | Filter Bar | alterar filtros e aplicar/limpar | único search field simples sem filtros adicionais |
 | Search | input incremental/submissão conforme volume | seleção obrigatória de ID sem lista de resultados |
 | Tabs | trocar vistas pares dentro do módulo | executar guardar, criar, aprovar ou eliminar |
@@ -359,9 +359,7 @@ A expressão original “filled rest e ao hover invertido” continua válida. O
 | Um clique | seleciona uma linha e ativa ações externas |
 | Duplo clique | abre detalhe/folha/registo associado |
 | Hover | mostra que a linha é interativa |
-| `Enter` | contrato atual diverge: Design System sec. 13 diz selecionar; Coder Handoff diz abrir |
-| `Ctrl+Enter` | abre segundo o Design System atual |
-| `Espaço` | Coder Handoff propõe selecionar |
+| `Enter` | nenhum atalho de teclado específico do BA DMO; seleção/abertura definidas por clique/duplo clique |
 | Escape | fecha menu/contexto, não perde filtros |
 | Filtro/limite novo | regressa à página 1; limpa seleção invisível |
 
@@ -392,7 +390,7 @@ A expressão original “filled rest e ao hover invertido” continua válida. O
 - scroll vertical/sticky header está mencionado;
 - scroll horizontal é último recurso e deve ficar dentro do card.
 
-`DESIGN DECISION REQUIRED`: fechar o comportamento de teclado (`Enter` vs `Ctrl+Enter`) e sorting antes de implementar o componente.
+`DESIGN DECISION REQUIRED`: fechar o sorting antes de implementar o componente. O comportamento de teclado de listas está resolvido: não existe atalho específico do BA DMO; clique seleciona e duplo clique abre.
 
 ## 7. Calendar Contract
 
@@ -780,7 +778,7 @@ Nenhuma destas afirmações deve ser usada para desenhar entidades ou relações
 |---|---|---|---|
 | Altura de botão | Design System: compact 34, normal 40 | CSS `.dmo-button` min 36; Coder Handoff chama 36 standard | fixar API: compact 34, default 36 ou 40 a decidir, form/filter 40; um token por size |
 | Hover/active | regra filled → hover inverted | alguns mockups têm `.btn` próprios e variantes de tom | usar o state machine da sec. 5.2; proibir brightness |
-| Enter numa lista | Design System: Enter seleciona, Ctrl+Enter abre | Coder Handoff: Enter abre, Espaço seleciona | escolher um contrato único; recomendação acessível: Espaço seleciona, Enter abre |
+| Enter numa lista | RESOLVIDO: sem atalho de teclado específico do BA DMO; clique seleciona, duplo clique abre | antigas propostas (`Enter`/`Ctrl+Enter`/`Espaço`) removidas | contrato único confirmado: clique seleciona; duplo clique abre |
 | Calendário | componente canónico documentado/Boquilhas | Peso apresenta variante visual | construir um único componente antes de Peso/Boquilhas |
 | Inputs | contrato global 40px | HTML locais usam alturas/paddings diferentes | Field global 40; compact só por variante explícita |
 | Card radius/shadow | 12px + shadow token | mockups redefinem radius/shadow localmente | usar Card global; module CSS só composição |
@@ -803,7 +801,7 @@ Nenhuma destas afirmações deve ser usada para desenhar entidades ou relações
 2. Definir escala de z-index/layers.
 3. Definir page width e gutters responsivos.
 4. Resolver tamanho default do Button: 36 ou 40px; manter variantes explícitas.
-5. Resolver teclado de row: Enter selecionar ou abrir.
+5. Teclado de row: RESOLVIDO — sem atalho específico do BA DMO; clique seleciona, duplo clique abre.
 6. Fechar border/focus tokens e regras de reduced motion.
 7. Declarar `dmo-design-system` como única fonte visual e impedir legacy/inline/local component CSS.
 
@@ -909,7 +907,7 @@ Gate obrigatório antes do passo 17: uma página-laboratório deve apresentar to
 
 - [ ] Um clique seleciona rows aplicáveis.
 - [ ] Duplo clique abre rows aplicáveis.
-- [ ] Contrato de teclado final é único.
+- [ ] Nenhum atalho de teclado específico do BA DMO permanece definido; clique seleciona, duplo clique abre.
 - [ ] Focus é sempre visível.
 - [ ] Filter change limpa seleção invisível e regressa à página 1.
 - [ ] Paginação apresenta 20/40/60, total e página.
@@ -966,7 +964,6 @@ Login é a única área sem bloqueio visual específico significativo. Os restan
 
 - tokens P0;
 - decisão de Button size;
-- contrato de teclado de rows;
 - uma arquitetura CSS sem estilos locais/legacy;
 - Calendar único;
 - Shell navigation/account/responsive;

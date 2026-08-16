@@ -1711,7 +1711,7 @@ function renderRecordList(){
     const hasData = COMPONENTS.some(c=>comps[c.key].n>0);
     const hasRangeViolation = COMPONENTS.some(c=>comps[c.key].rangeViolations.length>0);
     const worst = hasRangeViolation ? 'warn' : hasData ? 'ok' : 'pending';
-    return `<div class="rec-item ${selectedRecordId===r.id?'selected':''}" data-dmo-row data-id="${r.id}" role="option" aria-selected="${selectedRecordId===r.id?'true':'false'}" tabindex="0" onclick="selectRecord('${r.id}')" ondblclick="openRecord('${r.id}')" onkeydown="onRecordKeydown(event,'${r.id}')">
+    return `<div class="rec-item ${selectedRecordId===r.id?'selected':''}" data-dmo-row data-id="${r.id}" role="option" aria-selected="${selectedRecordId===r.id?'true':'false'}" tabindex="0" onclick="selectRecord('${r.id}')" ondblclick="openRecord('${r.id}')">
       <div><strong>${escapeHtml(r.reference||'(sem referência)')}</strong><div class="meta">${escapeHtml(r.jobOnId||'Sem Job On')} · ${escapeHtml(r.production)} · ${escapeHtml(r.machine||'—')} · ${escapeHtml(r.date)}</div></div>
       ${pillHTML(worst)}
     </div>`;
@@ -1720,11 +1720,6 @@ function renderRecordList(){
 function selectRecord(id){
   selectedRecordId=id;
   renderRecordList();
-}
-function onRecordKeydown(event,id){
-  if(event.key!=='Enter') return;
-  event.preventDefault();
-  if(event.ctrlKey) openRecord(id); else selectRecord(id);
 }
 function clearRecordFilters(){
   document.getElementById('recSearch').value='';

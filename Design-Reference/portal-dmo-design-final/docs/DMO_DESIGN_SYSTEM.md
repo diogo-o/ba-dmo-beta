@@ -302,8 +302,7 @@ Todos os módulos usam a mesma regra, sem botões adicionais de abertura:
 
 - um clique seleciona uma única linha;
 - duplo clique abre o registo/detalhe associado;
-- `Enter` seleciona;
-- `Ctrl+Enter` abre;
+- não existe atalho de teclado específico do BA DMO; a seleção/abertura é feita com clique/duplo clique;
 - seleção usa classe `selected` e `aria-selected="true"`;
 - contentor usa `data-dmo-list`;
 - linha usa `data-dmo-row` e `data-id` estável;

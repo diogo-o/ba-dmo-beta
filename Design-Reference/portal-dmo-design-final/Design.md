@@ -1007,7 +1007,7 @@ Todas as listas operacionais seguem o mesmo comportamento:
 2. a seleção fica visualmente mais escura;
 3. ações externas passam a atuar sobre a linha selecionada;
 4. duplo clique abre o detalhe/folha/registo associado;
-5. teclado: linha focável, `Enter` abre e `Espaço` seleciona;
+5. teclado: linha focável via padrões web nativos; não existe atalho específico do BA DMO (clique seleciona, duplo clique abre);
 6. seleção não executa uma mutação;
 7. mudar filtros limpa uma seleção que deixou de estar visível;
 8. após corrigir/eliminar, atualizar a lista e a paginação;
@@ -1537,7 +1537,7 @@ Para movimentos e aprovações guardar pelo menos:
 
 - [ ] Botões seguem filled → inverted hover.
 - [ ] Campos/filtros têm 40px.
-- [ ] Listas seguem clique/duplo clique/teclado.
+- [ ] Listas seguem clique seleciona / duplo clique abre; sem atalho de teclado específico do BA DMO.
 - [ ] Paginação oferece 20/40/60.
 - [ ] Calendário é o mesmo componente em todos os módulos.
 - [ ] Modais substituem prompts nativos.
@@ -1913,7 +1913,7 @@ Esta tabela completa o inventário anterior. O comportamento de estado continua 
 | List | selecionar/abrir itens com layout flexível | dados que exigem comparação por colunas |
 | List Row | clique seleciona; duplo abre | comando imediato sem estado de seleção |
 | Table | ordenar/filtrar/paginar dados tabulares | cartões sem relação colunar |
-| Table Row | clique seleciona; duplo abre; keyboard equivalente | inserir vários botões repetidos de abertura |
+| Table Row | clique seleciona; duplo abre (sem atalho de teclado específico do BA DMO) | inserir vários botões repetidos de abertura |
 | Filter Bar | alterar filtros e aplicar/limpar | único search field simples sem filtros adicionais |
 | Search | input incremental/submissão conforme volume | seleção obrigatória de ID sem lista de resultados |
 | Tabs | trocar vistas pares dentro do módulo | executar guardar, criar, aprovar ou eliminar |
@@ -1999,9 +1999,7 @@ A expressão original “filled rest e ao hover invertido” continua válida. O
 | Um clique | seleciona uma linha e ativa ações externas |
 | Duplo clique | abre detalhe/folha/registo associado |
 | Hover | mostra que a linha é interativa |
-| `Enter` | contrato atual diverge: Design System sec. 13 diz selecionar; Coder Handoff diz abrir |
-| `Ctrl+Enter` | abre segundo o Design System atual |
-| `Espaço` | Coder Handoff propõe selecionar |
+| `Enter` | nenhum atalho de teclado específico do BA DMO; seleção/abertura definidas por clique/duplo clique |
 | Escape | fecha menu/contexto, não perde filtros |
 | Filtro/limite novo | regressa à página 1; limpa seleção invisível |
 
@@ -2032,7 +2030,7 @@ A expressão original “filled rest e ao hover invertido” continua válida. O
 - scroll vertical/sticky header está mencionado;
 - scroll horizontal é último recurso e deve ficar dentro do card.
 
-`DESIGN DECISION REQUIRED`: fechar o comportamento de teclado (`Enter` vs `Ctrl+Enter`) e sorting antes de implementar o componente.
+`DESIGN DECISION REQUIRED`: fechar o sorting antes de implementar o componente. O comportamento de teclado de listas está resolvido: não existe atalho específico do BA DMO; clique seleciona e duplo clique abre.
 
 ## 7. Calendar Contract
 
@@ -2420,7 +2418,7 @@ Nenhuma destas afirmações deve ser usada para desenhar entidades ou relações
 |---|---|---|---|
 | Altura de botão | Design System: compact 34, normal 40 | CSS `.dmo-button` min 36; Coder Handoff chama 36 standard | fixar API: compact 34, default 36 ou 40 a decidir, form/filter 40; um token por size |
 | Hover/active | regra filled → hover inverted | alguns mockups têm `.btn` próprios e variantes de tom | usar o state machine da sec. 5.2; proibir brightness |
-| Enter numa lista | Design System: Enter seleciona, Ctrl+Enter abre | Coder Handoff: Enter abre, Espaço seleciona | escolher um contrato único; recomendação acessível: Espaço seleciona, Enter abre |
+| Enter numa lista | RESOLVIDO: sem atalho de teclado específico do BA DMO; clique seleciona, duplo clique abre | antigas propostas (`Enter`/`Ctrl+Enter`/`Espaço`) removidas | contrato único confirmado: clique seleciona; duplo clique abre |
 | Calendário | componente canónico documentado/Boquilhas | Peso apresenta variante visual | construir um único componente antes de Peso/Boquilhas |
 | Inputs | contrato global 40px | HTML locais usam alturas/paddings diferentes | Field global 40; compact só por variante explícita |
 | Card radius/shadow | 12px + shadow token | mockups redefinem radius/shadow localmente | usar Card global; module CSS só composição |
@@ -2443,7 +2441,7 @@ Nenhuma destas afirmações deve ser usada para desenhar entidades ou relações
 2. Definir escala de z-index/layers.
 3. Definir page width e gutters responsivos.
 4. Resolver tamanho default do Button: 36 ou 40px; manter variantes explícitas.
-5. Resolver teclado de row: Enter selecionar ou abrir.
+5. Teclado de row: RESOLVIDO — sem atalho específico do BA DMO; clique seleciona, duplo clique abre.
 6. Fechar border/focus tokens e regras de reduced motion.
 7. Declarar `dmo-design-system` como única fonte visual e impedir legacy/inline/local component CSS.
 
@@ -2549,7 +2547,7 @@ Gate obrigatório antes do passo 17: uma página-laboratório deve apresentar to
 
 - [ ] Um clique seleciona rows aplicáveis.
 - [ ] Duplo clique abre rows aplicáveis.
-- [ ] Contrato de teclado final é único.
+- [ ] Nenhum atalho de teclado específico do BA DMO permanece definido; clique seleciona, duplo clique abre.
 - [ ] Focus é sempre visível.
 - [ ] Filter change limpa seleção invisível e regressa à página 1.
 - [ ] Paginação apresenta 20/40/60, total e página.
@@ -2606,7 +2604,6 @@ Login é a única área sem bloqueio visual específico significativo. Os restan
 
 - tokens P0;
 - decisão de Button size;
-- contrato de teclado de rows;
 - uma arquitetura CSS sem estilos locais/legacy;
 - Calendar único;
 - Shell navigation/account/responsive;
@@ -3094,8 +3091,7 @@ Todos os módulos usam a mesma regra, sem botões adicionais de abertura:
 
 - um clique seleciona uma única linha;
 - duplo clique abre o registo/detalhe associado;
-- `Enter` seleciona;
-- `Ctrl+Enter` abre;
+- não existe atalho de teclado específico do BA DMO; a seleção/abertura é feita com clique/duplo clique;
 - seleção usa classe `selected` e `aria-selected="true"`;
 - contentor usa `data-dmo-list`;
 - linha usa `data-dmo-row` e `data-id` estável;
@@ -5615,7 +5611,7 @@ O ficheiro `dmo-interactions.js` estabelece o comportamento canónico:
 - Cada linha/cartão usa `data-dmo-row` e um `data-id` estável.
 - Um clique seleciona uma única linha e emite `dmo:list-select`.
 - Duplo clique abre o registo e emite `dmo:list-open`.
-- `Enter` seleciona; `Ctrl+Enter` abre, garantindo uso por teclado.
+- Não existe atalho de teclado específico do BA DMO; a seleção/abertura é feita com clique/duplo clique.
 - A seleção usa sempre a classe `selected` e `aria-selected`.
 - Os botões de ação ficam fora da lista e respondem ao registo selecionado.
 - Filtros nunca alteram ou eliminam seleção silenciosamente; se a linha deixar de estar visível, a seleção é limpa e as ações ficam desativadas.
@@ -12677,7 +12673,7 @@ function renderRecordList(){
     const hasData = COMPONENTS.some(c=>comps[c.key].n>0);
     const hasRangeViolation = COMPONENTS.some(c=>comps[c.key].rangeViolations.length>0);
     const worst = hasRangeViolation ? 'warn' : hasData ? 'ok' : 'pending';
-    return `<div class="rec-item ${selectedRecordId===r.id?'selected':''}" data-dmo-row data-id="${r.id}" role="option" aria-selected="${selectedRecordId===r.id?'true':'false'}" tabindex="0" onclick="selectRecord('${r.id}')" ondblclick="openRecord('${r.id}')" onkeydown="onRecordKeydown(event,'${r.id}')">
+    return `<div class="rec-item ${selectedRecordId===r.id?'selected':''}" data-dmo-row data-id="${r.id}" role="option" aria-selected="${selectedRecordId===r.id?'true':'false'}" tabindex="0" onclick="selectRecord('${r.id}')" ondblclick="openRecord('${r.id}')">
       <div><strong>${escapeHtml(r.reference||'(sem referência)')}</strong><div class="meta">${escapeHtml(r.jobOnId||'Sem Job On')} · ${escapeHtml(r.production)} · ${escapeHtml(r.machine||'—')} · ${escapeHtml(r.date)}</div></div>
       ${pillHTML(worst)}
     </div>`;
@@ -12686,11 +12682,6 @@ function renderRecordList(){
 function selectRecord(id){
   selectedRecordId=id;
   renderRecordList();
-}
-function onRecordKeydown(event,id){
-  if(event.key!=='Enter') return;
-  event.preventDefault();
-  if(event.ctrlKey) openRecord(id); else selectRecord(id);
 }
 function clearRecordFilters(){
   document.getElementById('recSearch').value='';
@@ -17537,7 +17528,7 @@ SELECTORS (80): :root ; * ; body ; button ; input ; select ; textarea ; .dmo-but
 ### INTERACTION EXTRACTION
 ```
 FUNCTION/USAGE (3): function rows, function selectRow, => {
-EVENT TYPES (3): click, dblclick, keydown
+EVENT TYPES (2): click, dblclick
 QUERY SELECTORS: [data-dmo-row] ; [data-dmo-list] ; [data-dmo-calendar] ; [data-date]
 DATASET READS: id, date
 CustomEvent: 4
@@ -17578,15 +17569,6 @@ window.onload: 0
         bubbles: true,
         detail: { id: row.dataset.id || null, row }
       })));
-      row.addEventListener("keydown", (event) => {
-        if (event.key === "Enter") selectRow(list, row);
-        if (event.key === "Enter" && event.ctrlKey) {
-          list.dispatchEvent(new CustomEvent("dmo:list-open", {
-            bubbles: true,
-            detail: { id: row.dataset.id || null, row }
-          }));
-        }
-      });
     });
   });
 
@@ -17810,7 +17792,7 @@ Apenas design/interação. Baseado nas divergências detetadas entre ficheiros (
 |---|---|---|---|---|---|
 | DC-01 | Altura de botão | Design System: compact 34 / normal 40 | `dmo-design-system.css` `.dmo-button` min 36; CODER: 36 standard | fixar API: compact 34, default 36/40 a decidir; um token por size | HIGH |
 | DC-02 | Hover/active | filled → hover invertido | alguns mockups têm `.btn` próprios e variantes de tom | usar state machine §5.2; proibir brightness | MEDIUM |
-| DC-03 | Enter em lista | Design System: Enter seleciona, Ctrl+Enter abre | CODER: Enter abre, Espaço seleciona | contrato de teclado único | HIGH |
+| DC-03 | Enter em lista | RESOLVIDO: sem atalho de teclado específico do BA DMO; clique seleciona, duplo clique abre | antigas propostas (`Enter`/`Ctrl+Enter`/`Espaço`) removidas | contrato único confirmado | RESOLVED |
 | DC-04 | Calendário | componente canónico documentado/Boquilhas | Peso apresenta variante visual | um único componente | HIGH |
 | DC-05 | Inputs | contrato global 40px | HTML locais com alturas/paddings diferentes | Field global 40; compact só por variante | MEDIUM |
 | DC-06 | Card radius/shadow | 12px + shadow token | mockups redefinem radius/shadow localmente | usar Card global | MEDIUM |
@@ -17835,7 +17817,7 @@ Classificação de gaps de design. Não inclui DB/domain. Base: `docs/DESIGN_IMP
 2. escala de z-index/layers
 3. page width e gutters responsivos
 4. tamanho default do Button (36 ou 40)
-5. teclado de row (Enter selecionar vs abrir)
+5. teclado de row (RESOLVIDO: sem atalho específico do BA DMO; clique seleciona, duplo clique abre)
 6. border/focus tokens + regras de reduced motion
 7. declarar `dmo-design-system` como única fonte visual (impedir legacy/inline/local component CSS)
 
@@ -17938,7 +17920,7 @@ Consolidado apenas do que resulta claramente das fontes. Onde existir conflito n
 - Botões: filled em repouso, invertidos no hover/focus; sem brightness; danger usa vermelho moderado.
 - Estados: default/hover/focus/active/selected/disabled/loading/success/warning/error; focus visible independente de hover.
 - Modais/confirmação substituem APIs nativas (`confirm/prompt/alert`).
-- `UNRESOLVED DESIGN CONFLICT`: teclado de row (Enter seleciona vs abre; Espaço/Ctrl+Enter); requisito `aria-pressed`/keyboard de calendar confirmado.
+- Listas: um clique seleciona, duplo clique abre; não existe atalho de teclado específico do BA DMO.
 
 ### Canonical calendar behavior
 

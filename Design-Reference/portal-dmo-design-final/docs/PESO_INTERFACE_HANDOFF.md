@@ -202,7 +202,7 @@ O ficheiro `dmo-interactions.js` estabelece o comportamento canónico:
 - Cada linha/cartão usa `data-dmo-row` e um `data-id` estável.
 - Um clique seleciona uma única linha e emite `dmo:list-select`.
 - Duplo clique abre o registo e emite `dmo:list-open`.
-- `Enter` seleciona; `Ctrl+Enter` abre, garantindo uso por teclado.
+- Não existe atalho de teclado específico do BA DMO; a seleção/abertura é feita com clique/duplo clique.
 - A seleção usa sempre a classe `selected` e `aria-selected`.
 - Os botões de ação ficam fora da lista e respondem ao registo selecionado.
 - Filtros nunca alteram ou eliminam seleção silenciosamente; se a linha deixar de estar visível, a seleção é limpa e as ações ficam desativadas.

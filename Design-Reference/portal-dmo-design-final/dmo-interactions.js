@@ -26,15 +26,6 @@
         bubbles: true,
         detail: { id: row.dataset.id || null, row }
       })));
-      row.addEventListener("keydown", (event) => {
-        if (event.key === "Enter") selectRow(list, row);
-        if (event.key === "Enter" && event.ctrlKey) {
-          list.dispatchEvent(new CustomEvent("dmo:list-open", {
-            bubbles: true,
-            detail: { id: row.dataset.id || null, row }
-          }));
-        }
-      });
     });
   });
 

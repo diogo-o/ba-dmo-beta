@@ -115,7 +115,7 @@ Todas as listas operacionais seguem o mesmo comportamento:
 2. a seleção fica visualmente mais escura;
 3. ações externas passam a atuar sobre a linha selecionada;
 4. duplo clique abre o detalhe/folha/registo associado;
-5. teclado: linha focável, `Enter` abre e `Espaço` seleciona;
+5. teclado: linha focável via padrões web nativos; não existe atalho específico do BA DMO (clique seleciona, duplo clique abre);
 6. seleção não executa uma mutação;
 7. mudar filtros limpa uma seleção que deixou de estar visível;
 8. após corrigir/eliminar, atualizar a lista e a paginação;
@@ -645,7 +645,7 @@ Para movimentos e aprovações guardar pelo menos:
 
 - [ ] Botões seguem filled → inverted hover.
 - [ ] Campos/filtros têm 40px.
-- [ ] Listas seguem clique/duplo clique/teclado.
+- [ ] Listas seguem clique seleciona / duplo clique abre; sem atalho de teclado específico do BA DMO.
 - [ ] Paginação oferece 20/40/60.
 - [ ] Calendário é o mesmo componente em todos os módulos.
 - [ ] Modais substituem prompts nativos.
