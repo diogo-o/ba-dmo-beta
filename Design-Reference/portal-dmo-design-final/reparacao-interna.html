@@ -1,0 +1,975 @@
+<!doctype html>
+<html lang="pt-PT">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Reparação interna — Portal DMO</title>
+    <link rel="stylesheet" href="dmo-design-system.css" />
+    <style>
+      :root {
+        --b: #3c73a8;
+        --bd: #193046;
+        --bs: #e8eff7;
+        --page: #f6f9fc;
+        --sub: #f1f6fa;
+        --line: #d9e6f2;
+        --text: #172d42;
+        --muted: #64778a;
+        --green: #527c72;
+        --green-s: #e5f0eb;
+        --warn: #a97943;
+        --warn-s: #f7f0e7;
+        --red: #9a625d;
+        --red-s: #f3e9e7;
+        --r: 12px;
+        --shadow: 0 8px 24px rgba(25, 48, 70, 0.06);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--page);
+        color: var(--text);
+        font:
+          14px/1.45 Inter,
+          "Segoe UI",
+          sans-serif;
+      }
+      button,
+      input,
+      select,
+      textarea {
+        font: inherit;
+      }
+      .header {
+        height: 76px;
+        display: flex;
+        align-items: center;
+        gap: 13px;
+        padding: 10px 28px;
+        background: #fff;
+        border-bottom: 1px solid var(--line);
+      }
+      .logo {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+      }
+      .head h1 {
+        margin: 0;
+        font-size: 18px;
+      }
+      .head p,
+      .muted {
+        margin: 3px 0 0;
+        color: var(--muted);
+        font-size: 11px;
+      }
+      .user {
+        margin-left: auto;
+        text-align: right;
+        padding-left: 18px;
+        border-left: 1px solid var(--line);
+      }
+      .user strong,
+      .user span {
+        display: block;
+      }
+      .user span {
+        font-size: 11px;
+        color: var(--muted);
+      }
+      .tabs {
+        height: 52px;
+        display: flex;
+        gap: 26px;
+        padding: 0 28px;
+        background: #fff;
+        border-bottom: 1px solid var(--line);
+      }
+      .tab {
+        border: 0;
+        border-bottom: 3px solid transparent;
+        background: none;
+        color: var(--muted);
+        font-weight: 750;
+        cursor: pointer;
+      }
+      .tab.active {
+        color: var(--b);
+        border-color: var(--b);
+      }
+      .main {
+        max-width: 1320px;
+        margin: auto;
+        padding: 26px;
+      }
+      .view {
+        display: none;
+      }
+      .view.active {
+        display: block;
+      }
+      .page-head {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 16px;
+      }
+      .page-head h2 {
+        margin: 0;
+        font-size: 24px;
+      }
+      .card {
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: var(--r);
+        box-shadow: var(--shadow);
+      }
+      .pad {
+        padding: 18px;
+      }
+      .btn {
+        min-height: 36px;
+        padding: 7px 12px;
+        border: 1px solid var(--b);
+        border-radius: 8px;
+        background: var(--b);
+        color: #fff;
+        font-weight: 750;
+        cursor: pointer;
+      }
+      .btn:hover,
+      .btn:focus-visible,
+      .btn.active {
+        background: #fff;
+        color: var(--b);
+        outline: none;
+      }
+      .btn:disabled {
+        background: #cbd5df;
+        border-color: #cbd5df;
+        color: #fff;
+        cursor: not-allowed;
+      }
+      .icon {
+        width: 36px;
+        padding: 0;
+      }
+      .field label {
+        display: block;
+        margin-bottom: 6px;
+        color: var(--muted);
+        font-size: 11px;
+        font-weight: 750;
+      }
+      .field input,
+      .field select,
+      .field textarea {
+        width: 100%;
+        min-height: 40px;
+        padding: 9px 11px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+        color: var(--text);
+        outline: none;
+      }
+      .field input:focus,
+      .field select:focus,
+      .field textarea:focus {
+        border-color: var(--b);
+        box-shadow: 0 0 0 3px #3c73a820;
+      }
+      .line-choice {
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 8px;
+      }
+      .line-card {
+        width: 100%;
+        min-width: 0;
+        min-height: 46px;
+        padding: 7px 9px;
+        text-align: left;
+      }
+      .line-card strong,
+      .line-card small {
+        display: block;
+      }
+      .line-card strong { font-size: 12px; }
+      .line-card small {
+        margin-top: 2px;
+        overflow: hidden;
+        font-size: 10px;
+        font-weight: 650;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        opacity: 0.84;
+      }
+      .line-card[data-reference="—"] {
+        border-color: #ccd7e1;
+        background: #eef2f6;
+        color: #718293;
+      }
+      .line-card[data-reference="—"]:hover {
+        background: #fff;
+        color: #718293;
+      }
+      .flow {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 16px;
+      }
+      .flow > * {
+        min-width: 0;
+      }
+      .step-title {
+        font-size: 11px;
+        font-weight: 850;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        margin: 0 0 9px;
+      }
+      .context {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 8px;
+        margin-top: 16px;
+      }
+      .context div {
+        padding: 10px;
+        border-left: 3px solid var(--b);
+        border-radius: 8px;
+        background: var(--sub);
+      }
+      .context span {
+        display: block;
+        color: var(--muted);
+        font-size: 9px;
+      }
+      .context strong {
+        font-size: 13px;
+      }
+      .register {
+        display: grid;
+        grid-template-columns: 170px 180px 1fr;
+        gap: 12px;
+        align-items: end;
+        margin-top: 16px;
+      }
+      .type-choice {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+      .confirmation {
+        display: none;
+        margin-top: 14px;
+        padding: 12px;
+        border-left: 4px solid var(--b);
+        border-radius: 8px;
+        background: var(--bs);
+      }
+      .confirmation.open {
+        display: block;
+      }
+      .confirmation-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 8px;
+      }
+      .confirmation span {
+        display: block;
+        color: var(--muted);
+        font-size: 9px;
+      }
+      .actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 8px;
+        margin-top: 14px;
+        padding-top: 14px;
+        border-top: 1px solid var(--line);
+      }
+      .status {
+        min-height: 210px;
+        display: grid;
+        place-items: center;
+        text-align: center;
+        padding: 24px;
+        border: 1px dashed #bdd3e8;
+        border-radius: 10px;
+        color: var(--muted);
+      }
+      .status strong {
+        display: block;
+        color: var(--bd);
+        font-size: 16px;
+      }
+      .status p {
+        margin: 4px 0 0;
+      }
+      .recent {
+        margin-top: 16px;
+      }
+      .panel-head {
+        display: flex;
+        align-items: start;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+      .panel-head h3 {
+        margin: 0;
+      }
+      .filters {
+        display: grid;
+        grid-template-columns: 2fr 110px 120px 150px 140px 100px auto;
+        gap: 9px;
+        align-items: end;
+        padding: 12px;
+        background: var(--sub);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+      }
+      .table-wrap {
+        overflow: auto;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        margin-top: 12px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        white-space: nowrap;
+      }
+      th {
+        padding: 10px 12px;
+        background: var(--sub);
+        color: var(--muted);
+        font-size: 10px;
+        text-align: left;
+        text-transform: uppercase;
+      }
+      td {
+        padding: 11px 12px;
+        border-top: 1px solid var(--line);
+      }
+      tr[data-dmo-row] {
+        cursor: pointer;
+      }
+      tr[data-dmo-row]:hover {
+        background: var(--page);
+      }
+      tr.selected {
+        background: var(--line);
+      }
+      .pill {
+        display: inline-flex;
+        padding: 4px 8px;
+        border-radius: 99px;
+        background: var(--bs);
+        color: #315d88;
+        font-size: 10px;
+        font-weight: 800;
+      }
+      .pill.corrected {
+        background: var(--warn-s);
+        color: var(--warn);
+      }
+      .footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        padding-top: 11px;
+        color: var(--muted);
+        font-size: 11px;
+      }
+      .pager {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+      }
+      .inline {
+        display: none;
+        margin-top: 14px;
+      }
+      .inline.open {
+        display: block;
+      }
+      .correction-grid {
+        display: grid;
+        grid-template-columns: 120px 170px 180px 1fr;
+        gap: 10px;
+        align-items: end;
+      }
+      .notice {
+        display: none;
+        margin-top: 12px;
+        padding: 11px;
+        border-left: 4px solid var(--warn);
+        border-radius: 8px;
+        background: var(--warn-s);
+        color: #77532f;
+      }
+      .notice.show {
+        display: block;
+      }
+      .toast {
+        position: fixed;
+        z-index: 100;
+        right: 22px;
+        bottom: 22px;
+        padding: 11px 15px;
+        border-radius: 9px;
+        background: #0f1d2a;
+        color: #fff;
+        opacity: 0;
+        transform: translateY(50px);
+        transition: 0.2s;
+      }
+      .toast.show {
+        opacity: 1;
+        transform: none;
+      }
+      .active-job {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-top: 16px;
+        padding: 10px 12px;
+        border: 1px solid var(--b);
+        border-left-width: 4px;
+        border-radius: 9px;
+        background: var(--bs);
+      }
+      .active-job span {
+        color: var(--muted);
+        font-size: 10px;
+        font-weight: 750;
+      }
+      .active-job strong {
+        font-size: 16px;
+        color: var(--bd);
+      }
+      .active-job small {
+        margin-left: auto;
+        color: var(--muted);
+      }
+      @media (max-width: 1000px) {
+        .line-choice {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+        .context,
+        .confirmation-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        .filters {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      @media (max-width: 650px) {
+        .active-job {
+          align-items: flex-start;
+          flex-direction: column;
+          gap: 2px;
+        }
+        .active-job small {
+          margin-left: 0;
+        }
+        .header {
+          padding: 10px 14px;
+        }
+        .user {
+          display: none;
+        }
+        .tabs {
+          padding: 0 12px;
+        }
+        .main {
+          padding: 16px 12px;
+        }
+        .line-choice {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .register,
+        .context,
+        .confirmation-grid,
+        .filters,
+        .correction-grid {
+          grid-template-columns: 1fr;
+        }
+        .table-wrap table {
+          min-width: 900px;
+        }
+        .footer {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+        .pager {
+          align-self: flex-end;
+        }
+        .page-head {
+          align-items: start;
+        }
+        .status {
+          min-height: 140px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <img class="logo" src="logo_recolored(1).png" alt="BA" />
+      <div class="head">
+        <h1>Reparação interna</h1>
+        <p>Registo de intervenções CM e MF durante a produção</p>
+      </div>
+      <div class="user">
+        <strong>João Silva</strong><span>Reparador de turno</span>
+      </div>
+    </header>
+    <nav class="tabs">
+      <button class="tab active" data-view="registo">Registo</button
+      ><button class="tab" data-view="historico">Histórico</button>
+    </nav>
+    <main class="main">
+      <section class="view active" id="registo">
+        <div class="page-head">
+          <div>
+            <h2>Registar reparação</h2>
+            <p class="muted">
+              Escolha a produção; o contexto ativo é carregado automaticamente.
+            </p>
+          </div>
+        </div>
+        <div class="flow">
+          <aside class="card pad">
+            <p class="step-title">1 · Produção por linha</p>
+            <div class="line-choice">
+              <button class="btn line-card" data-line="B1" data-reference="5774T173" data-production="202603"><strong>B1</strong><small>5774T173</small></button>
+              <button class="btn line-card" data-line="B2" data-reference="5810T188" data-production="202602"><strong>B2</strong><small>5810T188</small></button>
+              <button class="btn line-card" data-line="B3" data-reference="9389T194" data-production="202601"><strong>B3</strong><small>9389T194</small></button>
+              <button class="btn line-card" data-line="C1" data-reference="9121T173" data-production="202602"><strong>C1</strong><small>9121T173</small></button>
+              <button class="btn line-card" data-line="C2" data-reference="—" data-production="—"><strong>C2</strong><small>Sem Job On ativo</small></button>
+              <button class="btn line-card" data-line="C3" data-reference="5447T173" data-production="202601"><strong>C3</strong><small>5447T173</small></button>
+            </div>
+            <p class="muted" style="margin-top: 12px">
+              As referências são obtidas dos Job On ativos.
+            </p>
+          </aside>
+          <section class="card pad">
+            <div id="initialState" class="status">
+              <div>
+                <strong>Selecione uma produção</strong>
+                <p>Será mostrado o Job On ativo nesse contexto.</p>
+              </div>
+            </div>
+            <div id="activeForm" hidden>
+              <div class="panel-head">
+                <div>
+                  <p class="step-title">2 · Contexto automático</p>
+                  <h3 id="activeContextTitle">Produção ativa na B1</h3>
+                </div>
+                <span class="pill">Atualizado agora</span>
+              </div>
+              <div class="context">
+                <div><span>Produção</span><strong id="contextProduction">202603</strong></div>
+                <div><span>Referência</span><strong id="contextReference">5774T173</strong></div>
+                <div><span>Job On</span><strong id="contextJobOn">JO-202603-B1</strong></div>
+                <div><span>Data</span><strong>18/08/2026</strong></div>
+              </div>
+              <div class="active-job">
+                <span>REFERÊNCIA ATIVA DO JOB ON</span
+                ><strong id="activeJobReference">5774T173</strong
+                ><small id="activeJobMeta">Produção 202603 · B1</small>
+              </div>
+              <div class="register">
+                <div>
+                  <p class="step-title">3 · Tipo</p>
+                  <div class="type-choice">
+                    <button class="btn active" data-type="CM">CM</button
+                    ><button class="btn" data-type="MF">MF</button>
+                  </div>
+                </div>
+                <div class="field">
+                  <label for="toolNumber">Número individual</label
+                  ><input
+                    id="toolNumber"
+                    inputmode="numeric"
+                    placeholder="Introduzir número"
+                  />
+                </div>
+                <button class="btn" id="review" disabled>Rever registo</button>
+              </div>
+              <div class="notice" id="toolNotice">
+                Número não encontrado no contexto selecionado. Confirme o tipo e
+                o número.
+              </div>
+              <div class="confirmation" id="confirmation">
+                <p class="step-title">Confirmar</p>
+                <div class="confirmation-grid">
+                  <div><span>Linha</span><strong>B1</strong></div>
+                  <div><span>Produção</span><strong>202603</strong></div>
+                  <div>
+                    <span>Referência / lote</span><strong>5774T173 · 01</strong>
+                  </div>
+                  <div>
+                    <span>Tipo</span><strong id="confirmType">CM</strong>
+                  </div>
+                  <div>
+                    <span>N.º individual</span
+                    ><strong id="confirmNumber">—</strong>
+                  </div>
+                </div>
+                <div class="actions">
+                  <button class="btn" id="cancelReview">Voltar</button
+                  ><button class="btn" id="submitRepair">
+                    Registar reparação
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <section class="card pad recent">
+          <div class="panel-head">
+            <div>
+              <h3>Últimos registos do turno</h3>
+              <p class="muted">Confirmação rápida sem sair da página.</p>
+            </div>
+            <div class="field" style="width: 100px">
+              <label>Linhas</label
+              ><select>
+                <option>20</option>
+                <option>40</option>
+                <option>60</option>
+              </select>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table data-dmo-list>
+              <thead>
+                <tr>
+                  <th>Data/hora</th>
+                  <th>Linha</th>
+                  <th>Produção</th>
+                  <th>Referência</th>
+                  <th>Lote</th>
+                  <th>Tipo</th>
+                  <th>N.º individual</th>
+                  <th>Operador</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr data-dmo-row data-id="ri-1">
+                  <td>18/08 · 14:32</td>
+                  <td>B1</td>
+                  <td>202603</td>
+                  <td><strong>5774T173</strong></td>
+                  <td>01</td>
+                  <td>CM</td>
+                  <td>34</td>
+                  <td>João Silva</td>
+                </tr>
+                <tr data-dmo-row data-id="ri-2">
+                  <td>18/08 · 14:18</td>
+                  <td>B3</td>
+                  <td>202601</td>
+                  <td><strong>9389T194</strong></td>
+                  <td>26</td>
+                  <td>MF</td>
+                  <td>12</td>
+                  <td>João Silva</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="footer">
+            <span>2 registos · Página 1 de 1</span>
+            <div class="pager">
+              <button class="btn icon" disabled aria-label="Página anterior">
+                ‹</button
+              ><span>1 / 1</span
+              ><button class="btn icon" disabled aria-label="Página seguinte">
+                ›
+              </button>
+            </div>
+          </div>
+        </section>
+      </section>
+      <section class="view" id="historico">
+        <div class="page-head">
+          <div>
+            <h2>Histórico</h2>
+            <p class="muted">
+              Consulte os registos e selecione um para corrigir.
+            </p>
+          </div>
+        </div>
+        <section class="card pad">
+          <div class="filters">
+            <div class="field">
+              <label>Referência, produção ou número</label
+              ><input id="historySearch" placeholder="Pesquisar" />
+            </div>
+            <div class="field">
+              <label>Linha</label
+              ><select>
+                <option>Todas</option>
+                <option>B1</option>
+                <option>B2</option>
+                <option>B3</option>
+                <option>C1</option>
+                <option>C2</option>
+                <option>C3</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Tipo</label
+              ><select>
+                <option>Todos</option>
+                <option>CM</option>
+                <option>MF</option>
+              </select>
+            </div>
+            <div class="field"><label>Desde</label><input type="date" /></div>
+            <div class="field"><label>Até</label><input type="date" /></div>
+            <div class="field">
+              <label>Linhas</label
+              ><select>
+                <option>20</option>
+                <option>40</option>
+                <option>60</option>
+              </select>
+            </div>
+            <button class="btn">Limpar</button>
+          </div>
+          <p class="muted" style="margin-top: 10px">
+            Um clique seleciona; duplo clique abre o detalhe completo.
+          </p>
+          <div class="table-wrap">
+            <table data-dmo-list id="historyList">
+              <thead>
+                <tr>
+                  <th>Data/hora</th>
+                  <th>Linha</th>
+                  <th>Produção</th>
+                  <th>Referência</th>
+                  <th>Lote</th>
+                  <th>Tipo</th>
+                  <th>N.º individual</th>
+                  <th>Operador</th>
+                  <th>Estado</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr data-dmo-row data-id="ri-1">
+                  <td>18/08 · 14:32</td>
+                  <td>B1</td>
+                  <td>202603</td>
+                  <td><strong>5774T173</strong></td>
+                  <td>01</td>
+                  <td>CM</td>
+                  <td>34</td>
+                  <td>João Silva</td>
+                  <td>Atual</td>
+                </tr>
+                <tr data-dmo-row data-id="ri-2">
+                  <td>18/08 · 14:18</td>
+                  <td>B3</td>
+                  <td>202601</td>
+                  <td><strong>9389T194</strong></td>
+                  <td>26</td>
+                  <td>MF</td>
+                  <td>12</td>
+                  <td>João Silva</td>
+                  <td><span class="pill corrected">Corrigido</span></td>
+                </tr>
+                <tr data-dmo-row data-id="ri-3">
+                  <td>17/08 · 22:06</td>
+                  <td>C1</td>
+                  <td>202602</td>
+                  <td><strong>9121T173</strong></td>
+                  <td>11</td>
+                  <td>CM</td>
+                  <td>45</td>
+                  <td>Ana Martins</td>
+                  <td>Atual</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="footer">
+            <span>3 registos · Página 1 de 1</span>
+            <div class="pager">
+              <button class="btn" id="correct" disabled>Corrigir registo</button>
+              <button class="btn icon" disabled aria-label="Página anterior">
+                ‹</button
+              ><span>1 / 1</span
+              ><button class="btn icon" disabled aria-label="Página seguinte">
+                ›
+              </button>
+            </div>
+          </div>
+          <div class="card pad inline" id="correction">
+            <div class="panel-head">
+              <div>
+                <h3>Corrigir registo selecionado</h3>
+                <p class="muted">
+                  O operador e a data/hora originais permanecem visíveis.
+                </p>
+              </div>
+              <button class="btn icon" id="closeCorrection">×</button>
+            </div>
+            <div class="correction-grid">
+              <div class="field">
+                <label>Linha</label
+                ><select>
+                  <option>B3</option>
+                  <option>B1</option>
+                  <option>B2</option>
+                  <option>C1</option>
+                  <option>C2</option>
+                  <option>C3</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>Tipo</label
+                ><select>
+                  <option>MF</option>
+                  <option>CM</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>Número individual</label><input value="12" />
+              </div>
+              <div class="field">
+                <label>Justificação da correção</label
+                ><input placeholder="Indique o engano corrigido" />
+              </div>
+            </div>
+            <div class="context">
+              <div>
+                <span>Operador original</span><strong>João Silva</strong>
+              </div>
+              <div>
+                <span>Data/hora original</span><strong>18/08 · 14:18</strong>
+              </div>
+              <div><span>Produção original</span><strong>202601</strong></div>
+              <div><span>Referência</span><strong>9389T194</strong></div>
+              <div><span>Registo</span><strong>RI-000124</strong></div>
+            </div>
+            <div class="actions">
+              <button class="btn" id="saveCorrection">Guardar correção</button>
+            </div>
+          </div>
+        </section>
+      </section>
+    </main>
+    <div class="toast" id="toast"></div>
+    <script src="dmo-interactions.js"></script>
+    <script>
+      const $ = (s) => document.querySelector(s),
+        $$ = (s) => [...document.querySelectorAll(s)],
+        say = (t) => {
+          const x = $("#toast");
+          x.textContent = t;
+          x.classList.add("show");
+          setTimeout(() => x.classList.remove("show"), 2200);
+        };
+      $$(".tab").forEach(
+        (t) =>
+          (t.onclick = () => {
+            $$(".tab,.view").forEach((x) => x.classList.remove("active"));
+            t.classList.add("active");
+            $("#" + t.dataset.view).classList.add("active");
+          }),
+      );
+      $$("[data-line]").forEach(
+        (b) =>
+          (b.onclick = () => {
+            $$("[data-line]").forEach((x) => x.classList.remove("active"));
+            b.classList.add("active");
+            const line = b.dataset.line;
+            const reference = b.dataset.reference;
+            const production = b.dataset.production;
+            if (reference === "—") {
+              $("#activeForm").hidden = true;
+              $("#initialState").hidden = false;
+              $("#initialState strong").textContent =
+                "Sem Job On ativo na " + line;
+              $("#initialState p").textContent =
+                "Não é possível registar uma reparação sem contexto de produção.";
+              return;
+            }
+            $("#initialState").hidden = true;
+            $("#activeForm").hidden = false;
+            $("#activeContextTitle").textContent =
+              "Produção ativa na " + line;
+            $("#contextProduction").textContent = production;
+            $("#contextReference").textContent = reference;
+            $("#contextJobOn").textContent =
+              "JO-" + production + "-" + line;
+            $("#activeJobReference").textContent = reference;
+            $("#activeJobMeta").textContent =
+              "Produção " + production + " · " + line;
+            say("Contexto ativo carregado: " + reference);
+          }),
+      );
+      $$("[data-type]").forEach(
+        (b) =>
+          (b.onclick = () => {
+            $$("[data-type]").forEach((x) => x.classList.remove("active"));
+            b.classList.add("active");
+          }),
+      );
+      $("#toolNumber").oninput = () => {
+        $("#review").disabled = !$("#toolNumber").value.trim();
+        $("#toolNotice").classList.remove("show");
+        $("#confirmation").classList.remove("open");
+      };
+      $("#review").onclick = () => {
+        const n = $("#toolNumber").value.trim();
+        if (n === "999") {
+          $("#toolNotice").classList.add("show");
+          return;
+        }
+        $("#confirmType").textContent = $("[data-type].active").dataset.type;
+        $("#confirmNumber").textContent = n;
+        $("#confirmation").classList.add("open");
+      };
+      $("#cancelReview").onclick = () =>
+        $("#confirmation").classList.remove("open");
+      $("#submitRepair").onclick = () => {
+        $("#confirmation").classList.remove("open");
+        $("#toolNumber").value = "";
+        $("#review").disabled = true;
+        $("#toolNumber").focus();
+        say("Registo enviado; linha e tipo mantidos");
+      };
+      document.addEventListener("dmo:list-select", (e) => {
+        if (e.target.id === "historyList") $("#correct").disabled = false;
+      });
+      document.addEventListener("dmo:list-open", (e) =>
+        say("Abrir detalhe do registo " + e.detail.id),
+      );
+      $("#correct").onclick = () => $("#correction").classList.add("open");
+      $("#closeCorrection").onclick = () =>
+        $("#correction").classList.remove("open");
+      $("#saveCorrection").onclick = () => {
+        if (!$("#correction input[placeholder]").value.trim()) {
+          say("Indique a justificação da correção");
+          return;
+        }
+        $("#correction").classList.remove("open");
+        say("Correção preparada; original preservado");
+      };
+    </script>
+  </body>
+</html>
