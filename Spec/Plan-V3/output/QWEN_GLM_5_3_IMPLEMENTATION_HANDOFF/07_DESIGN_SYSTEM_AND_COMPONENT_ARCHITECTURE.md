@@ -73,7 +73,10 @@ com prioridade para os bloqueantes P1:
     closed/loading/ready/selected/empty/partial-source/error; falha parcial por fonte distinguida
     (`Localização indisponível`);
 17. **Local Directory Selector** (novo): autorização da pasta raiz local de relatórios; estados
-    unconfigured/requesting/authorized/permission-lost/unavailable/error (Definições);
+    unconfigured/requesting/authorized/permission-lost/unavailable/error (Definições); reutilizado na
+    área da imagem do Job On para **ligar/selecionar o diretório da imagem** (ação "Ligar diretório
+    da imagem" ou rótulo equivalente da linguagem final), mesmos estados e fallback — sem novos
+    controlos;
 18. **Resolved Report Path** (novo): read-only `diretório principal / subpasta do lote`
     (ex.: `Capacidades / 5447T173`); estados resolved/missing-root/invalid-subfolder/permission-lost;
     não é editor de caminho absoluto (criação de lote do Peso + Pegamentos).
@@ -82,10 +85,13 @@ com prioridade para os bloqueantes P1:
 (contrato §20, antes do passo 17 de módulos).
 
 **Fronteira Local Directory Selector / Resolved Report Path (Plano-V3):** o File System Access API é
-**cliente/browser-only** e destina-se **exclusivamente à exportação de PDFs** (nunca a domain
-persistence, offline database, business datastore ou source of truth). Requer secure context
-**HTTPS** (Render fornece em deployment normal). Fallback = **download padrão do browser** quando a
-API não é suportada, a autorização é recusada, o handle é inválido ou a permission se perdeu.
+**cliente/browser-only** e destina-se **à exportação de PDFs** e à **ligação do diretório local das
+imagens do Job On** (nunca a domain persistence, offline database, business datastore ou source of
+truth — 03_ARCH §17). Requer secure context **HTTPS** (Render fornece em deployment normal).
+Fallback = **download padrão do browser** quando a API não é suportada, a autorização é recusada, o
+handle é inválido ou a permission se perdeu. O diretório ligado para a imagem do Job On é o diretório
+local das imagens do artigo; a BD guarda apenas a associação por revisão (`image_asset_id`), nunca o
+binário; o filesystem do Render não armazena a imagem do Job On; Supabase Storage não é obrigatório.
 **Exceção aprovada pelo owner:** IndexedDB pode persistir **apenas** o `FileSystemDirectoryHandle`
 (permission/state técnico da seleção do diretório local); nunca dados de domínio
 (03_ARCH §17; 06_DATA §16). Sem alterações ao aspeto visual/design.

@@ -116,7 +116,7 @@ e mapeados na secção 3 desta matriz.
 | TD-20 (capabilities Job On) | 02_DEC §3.20 | GLM-CAT-03; 04_ACC §6; GLM-JOB-* |
 | TD-21 (nomes de PDF) | 02_DEC §3.21 | GLM-DATA-09; GLM-PESO/GLM-PEG |
 | TD-22 (repair_exit_items BQ/CM/MF) | 02_DEC §3.22 | GLM-RE-*; 06_DATA §3.7 |
-| TD-23 (imagem por revisão Job On) | 02_DEC §3.23 | GLM-JOB-*; 06_DATA §9 |
+| TD-23 (imagem por revisão Job On; diretório local via File System Access, handle em IndexedDB, sem storage obrigatório) | 02_DEC §3.23 | GLM-JOB-*; 06_DATA §9; modules/05 §5/§10/§13; 09_TEST §10.7 |
 | TD-24 (História com grants de origem) | 02_DEC §3.24 | GLM-HIST-*; cenário 18 |
 | TD-25 (tabela densidades 5–35 °C — GAP-002) | 02_DEC §3.25 | GLM-PESO-05; 09_TEST §9.1–5; GLM prompt |
 | TD-26 (identidade lote CM — GAP-001) | 02_DEC §3.26 | GLM-PESO-06; GLM-FERR-03; 06_DATA §3.3/3.5; 09_TEST §9.16–17 |

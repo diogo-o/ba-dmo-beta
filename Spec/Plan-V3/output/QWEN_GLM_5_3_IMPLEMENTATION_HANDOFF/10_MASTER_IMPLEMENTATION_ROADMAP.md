@@ -197,7 +197,10 @@ Notas:
 - **Objetivo:** folha Job On como fonte operacional da produção: família `job_on*` do
   JOB_ON_DATA_MODEL (TD-18); Modo consulta (todos) vs Modo edição (Responsável técnico — TD-20);
   tabs Planeamento/Job On/Histórico/Definições; contexto fixo; famílias MP/CM, MF, BQ, PU, CAL, AN,
-  ARR, PI, CS, TP, FO com campos tipados e linhas CAL; imagem por revisão (TD-23); verificações
+  ARR, PI, CS, TP, FO com campos tipados e linhas CAL; imagem por revisão (TD-23 — **ligação do
+  diretório local da imagem** via **File System Access API**, handle `FileSystemDirectoryHandle` em
+  IndexedDB apenas como estado/permissão técnico, sem Supabase Storage obrigatório, sem binário na
+  BD, sem filesystem do Render); verificações
   (ocorrências materializadas; `jobon.confirmar`); duplicações (anterior/histórico/branco) com
   snapshot completo; alteração de datas com auditoria e projeção no calendário; comparação
   snapshot≠live; histórico em dois níveis (Produções da Referência → Revisões da Produção);
@@ -209,7 +212,9 @@ Notas:
   de revisão guardada; inferir compatibilidades; disponibilidade live em Modo consulta.
 - **Testes:** duplicações (origem imutável; tudo copiado; data substituída), datas auditadas + calendário,
   imutabilidade de revisões, modos consulta/edição e capabilities, verificações manuais persistidas,
-  landing Job On para todos os perfis, `Resolve(line, at)` e transições de estado (09_TEST §9.11–15).
+  landing Job On para todos os perfis, `Resolve(line, at)` e transições de estado (09_TEST §9.11–15);
+  imagem por revisão: ligação de diretório, recuperação de permissão, associação auditável por
+  revisão, sem binário na BD / Render / IndexedDB de domínio (09_TEST §10.7).
 
 ## U-14 — Armazém
 

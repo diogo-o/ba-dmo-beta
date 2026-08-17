@@ -179,6 +179,35 @@ A imagem é guardada por **revisão do Job On** (`job_on_revision.image_asset_id
 remoção confirmadas e auditadas; não é copiada entre produções sem regra explícita
 (JOB_ON_DATA_MODEL §2; JOB_ON_DESIGN_BRIEF §"Imagem do artigo").
 
+**CLARIFICAÇÃO OWNER (2026-08-17) — JOB ON IMAGE STORAGE / ACCESS (OWNER TECHNICAL DECISION /**
+**CLARIFICATION):** a imagem do artigo do Job On **não é obrigatoriamente armazenada no Supabase
+Storage**. O modelo aprovado é a **ligação/seleção do diretório local da imagem** na área da imagem
+do Job On, via **File System Access API** (cliente/browser-only), na mesma fronteira técnica dos PDFs
+(06_DATA §9/§16; 03_ARCH §17):
+- A UI expõe a ação **"Ligar diretório da imagem"** (ou rótulo equivalente da linguagem de design
+  final) por baixo/adjacente à área da imagem (modules/05 §10).
+- **IndexedDB** persiste **apenas** o `FileSystemDirectoryHandle` e o estado/permissão técnico
+  necessário para religar ao diretório; **nunca** imagem binária, dados de domínio, registos,
+  histórico, pending business actions ou outro application state como source of truth.
+- A imagem permanece no **filesystem local do utilizador/empresa**; a BD guarda apenas a
+  **associação/metadados estáveis** que identificam a imagem de cada revisão.
+- `image_asset_id` = **associação/identificador lógico e estável** (ou referência de metadados
+  equivalente) da imagem da revisão; **não** significa exigência de object storage (Supabase Storage).
+- **Proibido:** binário/Blob de imagem no PostgreSQL; imagem do Job On no filesystem do **Render**;
+  Supabase Storage obrigatório; dados de domínio persistidos em **IndexedDB**; caminho absoluto
+  Windows (ex.: `Z:\Images\foo.png`) como mecanismo de acesso do browser.
+- Handle indisponível/inválido/movido ou permissão perdida: o registo de negócio do Job On
+  **mantém-se válido**; o utilizador é convidado a **religar/reautorizar** o diretório; o Job On nunca é
+  tratado como corrompido/perdido.
+- Associação **por revisão do Job On** (manter TD-23); attach/replace/remove continuam **auditáveis**;
+  as ações de edição da imagem seguem a capability existente de edição do Job On (`jobon.edit`),
+  sem novas capacidades de autorização.
+- **Não altera** a arquitetura de PDF já aprovada (06_DATA §16): esta clarificação diz respeito apenas
+  a imagens de origem/referência do Job On, não a PDFs.
+
+Classificação: **OWNER TECHNICAL DECISION / CLARIFICATION** — não é nova funcionalidade, redesign
+arquitetural, Plan-V4, novo módulo ou novo subsistema de storage. `FUNCTIONAL / BUSINESS CHANGES: 0`.
+
 ### 3.24 TD-24 — História e autorização de origem (design sync; resolve questão conhecida #6)
 As vistas transversais de História/Auditoria aplicam a autorização dos **módulos de origem**: um
 utilizador apenas vê eventos/registos de módulos que o seu template autoriza; a tab Auditoria do

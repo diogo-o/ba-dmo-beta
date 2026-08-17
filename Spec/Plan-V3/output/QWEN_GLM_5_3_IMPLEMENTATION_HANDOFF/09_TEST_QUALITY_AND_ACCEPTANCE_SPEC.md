@@ -167,7 +167,16 @@ funcional:
    renderer concreto testável sem dependência comercial fixa;
 6. **Directory handle exception boundary:** IndexedDB persiste apenas o `FileSystemDirectoryHandle`;
    nenhum dado de domínio entra em IndexedDB; fallback de download quando API/permissão indisponível
-   (06_DATA §16; 03_ARCH §17).
+   (06_DATA §16; 03_ARCH §17);
+7. **Job On image directory (TD-23 clarificado):** (a) o diretório da imagem liga-se via File System
+   Access API e o `FileSystemDirectoryHandle` recupera-se de IndexedDB com permissão válida; (b) a
+   imagem da revisão apresenta-se a partir do diretório autorizado; (c) permissão perdida → UI de
+   religar/reautorizar, registo do Job On intacto; (d) ficheiro em falta → estado "imagem em falta"
+   recuperável; (e) attach/replace/remove geram eventos de auditoria; (f) utilizador sem `jobon.edit`
+   não altera a associação da imagem; (g) nenhum binário de imagem no PostgreSQL; (h) nenhuma imagem
+   do Job On no filesystem do Render; (i) nenhum dado de domínio em IndexedDB
+   (06_DATA §9; modules/05 §13).
 
 Incluídas nas unidades U-01 (CLI routing, no debug bypass), U-02 (migration checksum/idempotency/
-failure) e U-10/U-11 (PDF abstraction, directory handle boundary) do roadmap.
+failure), U-10/U-11 (PDF abstraction, directory handle boundary) e U-13 (Job On image directory) do
+roadmap.

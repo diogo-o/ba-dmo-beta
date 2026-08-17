@@ -180,17 +180,27 @@ Fronteira servidor/local (DS-08; PESO_INTERFACE §Persistência; CODER_HANDOFF �
   requesting/authorized/permission-lost/unavailable/error (componentes Local Directory Selector e
   Resolved Report Path); nunca apresentar a pasta como disponível antes de confirmar a permissão;
   o ficheiro local não é dado garantidamente disponível no servidor (DS-10/P2.10).
-- Imagem do artigo (Job On): guardada por revisão do Job On (`image_asset_id` — TD-23); storage fora
-  da base; substituição/remoção confirmadas e auditadas; sem cópia entre produções sem regra explícita.
+- Imagem do artigo (Job On): guardada por revisão do Job On (`image_asset_id` — TD-23); **modelo de
+  acesso = ligação/seleção do diretório local da imagem** via **File System Access API**
+  (cliente/browser-only), **não** obrigatoriamente Supabase Storage; a UI expõe "Ligar diretório da
+  imagem" (ou rótulo equivalente) na área da imagem; `image_asset_id` = **associação/identificador
+  lógico e estável** da imagem da revisão (ou referência de metadados equivalente) — nunca binário de
+  imagem; a BD guarda apenas essa associação e metadados estáveis; o binário permanece no filesystem
+  local do utilizador/empresa; o filesystem do Render **não** armazena a imagem do Job On;
+  substituição/remoção confirmadas e auditadas; sem cópia entre produções sem regra explícita;
+  handle indisponível/inválido/movido ou permissão perdida → registo do Job On mantém-se válido e o
+  utilizador religa/reautoriza o diretório (nunca perda/corrupção do Job On).
 - Impressões (listas de saída, folhas) são derivadas; imprimir não muda estado.
 - Sem bucket/tabela blob para PDFs.
 - **Fronteira browser-only (Plano-V3):** o File System Access é cliente/browser-only, para
-  **exportação de PDFs** exclusivamente; nunca para domain persistence, offline database, business
-  datastore ou source of truth (03_ARCH §17). Secure context **HTTPS** (Render fornece em deployment
-  normal); fallback = download padrão do browser quando API não suportada / autorização recusada /
-  handle inválido / permission lost. **Exceção aprovada pelo owner:** IndexedDB pode persistir apenas
-  o `FileSystemDirectoryHandle` (permission/state técnico da seleção do diretório local); nunca
-  dados de domínio (GLM-DATA-16/03_ARCH §17).
+  **exportação de PDFs** e para **ligar o diretório local das imagens do Job On** (exclusivamente;
+  nunca para domain persistence, offline database, business datastore ou source of truth —
+  03_ARCH §17). Secure context **HTTPS** (Render fornece em deployment normal); fallback = download
+  padrão do browser quando API não suportada / autorização recusada / handle inválido / permission
+  lost. **Exceção aprovada pelo owner:** IndexedDB pode persistir apenas o `FileSystemDirectoryHandle`
+  (permission/state técnico da seleção do diretório local); nunca dados de domínio
+  (GLM-DATA-16/03_ARCH §17). No caso do Job On, o diretório ligado é o diretório das imagens do
+  artigo; a associação por revisão vive na BD (`image_asset_id`), nunca o binário.
 
 ## 10. Integrações (GLM-DATA-10)
 

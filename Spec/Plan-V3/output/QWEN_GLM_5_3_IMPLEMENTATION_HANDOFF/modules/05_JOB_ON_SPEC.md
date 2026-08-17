@@ -41,6 +41,9 @@ cores agressivas (azul-cinza suave em consulta; âmbar/castanho suave em ediçã
 `Guardar alterações` fecha a edição e devolve a folha ao modo consulta; cria **nova revisão** — nunca
 UPDATE destrutivo da revisão anterior (TD-18).
 
+As ações de edição da imagem (ligar diretório, substituir, remover) seguem a capability existente de
+edição do Job On (`jobon.edit`); **sem novas capacidades de autorização**.
+
 ## 5. Entidades e dados (GLM-JOB-05; TD-18)
 
 Família canónica `job_on*` de `JOB_ON_DATA_MODEL.md` (detalhe em 06_DATA §3.6): `job_on`,
@@ -68,8 +71,16 @@ Família canónica `job_on*` de `JOB_ON_DATA_MODEL.md` (detalhe em 06_DATA §3.6
    de forma acionável. Consumidores: Reparação Interna, Boquilhas (painel lateral), Peso, Pegamentos.
 6. Dropdowns de negócio evolutivos (materiais, tipos, versões…) são data-driven via `job_on_field_option`,
    geridos em Definições por Família/Campo; desativar preserva valores em revisões antigas.
-7. Imagem do artigo guardada por revisão (`image_asset_id` — TD-23); substituir/remover com
-   confirmação e auditoria; sem cópia entre produções sem regra explícita.
+7. Imagem do artigo guardada por revisão (`image_asset_id` — TD-23): **ligação/seleção do diretório
+   local da imagem** via **File System Access API** (cliente/browser-only); a UI expõe "Ligar
+   diretório da imagem" (ou rótulo equivalente) na área da imagem; `image_asset_id` = associação/
+   identificador **lógico e estável** da imagem da revisão (ou metadados equivalentes) — nunca
+   binário/Blob de imagem na BD, nunca no filesystem do Render, nunca obrigatoriamente Supabase
+   Storage; o binário permanece no filesystem do utilizador/empresa; IndexedDB guarda **apenas** o
+   `FileSystemDirectoryHandle` e o estado técnico de reconexão (nunca dados de domínio);
+   substituir/remover com confirmação e auditoria; sem cópia entre produções sem regra explícita;
+   permissão perdida/handle movido → religar/reautorizar o diretório, o Job On nunca é tratado como
+   corrompido/perdido.
 
 ## 6. Workflows (GLM-JOB-06)
 
@@ -136,6 +147,9 @@ com referência/lote; 5) imagem do artigo; restante (PU, CAL, AN, ARR, PI, CS, T
 notas, verificações) com contraste secundário. Contexto fixo: Referência larga; Produção, Máquina,
 Secções, Gota, Tipo, Processo (herdado do lote do Peso — mostrado, não redefinido), Peso e Paragem
 compactos; datas no fim. `Processo` vem do lote do Peso; o operador não o redefine na folha.
+A área da imagem do artigo inclui, **por baixo/adjacente**, a ação de **ligar/selecionar o diretório
+da imagem** ("Ligar diretório da imagem" ou rótulo equivalente da linguagem de design), consistente
+com o design baseline — sem novos controlos nem redesign da UI.
 
 ## 11. Hard blocks vs avisos (GLM-JOB-11)
 
@@ -160,6 +174,18 @@ datas); alteração de datas auditada; consumidores guardam `job_on_revision_id`
 jobon.view/edit/configure/confirmar; catálogos de opções preservam revisões antigas. E2E: landing
 Job On para todos os perfis; consulta vs edição; substituição de ferramenta com lista live sem criar
 movimentos; verificações confirmadas manualmente. Acceptance: critérios do brief §14 + JOB_ON_DATA_MODEL §6.
+
+**Acceptance adicionais — diretório de imagem do Job On (TD-23 clarificado):**
+1. o utilizador consegue **ligar/selecionar o diretório** da imagem;
+2. o `FileSystemDirectoryHandle` recupera-se de IndexedDB enquanto a permissão permanece válida;
+3. a imagem associada à revisão é apresentada a partir do **diretório autorizado**;
+4. permissão perdida → UI de **religar/reautorizar** (nunca perda/corrupção do Job On);
+5. ficheiro de imagem em falta → estado **"imagem em falta" recuperável**;
+6. attach/replace/remove são **eventos de auditoria**;
+7. utilizador **sem `jobon.edit`** não modifica a associação da imagem;
+8. **nenhum binário de imagem** no PostgreSQL;
+9. **nenhuma imagem do Job On** escrita no filesystem do Render;
+10. **nenhum dado de domínio** persistido em IndexedDB.
 
 ## 14. MUST PRESERVE / DO NOT CARRY FORWARD (GLM-JOB-14)
 

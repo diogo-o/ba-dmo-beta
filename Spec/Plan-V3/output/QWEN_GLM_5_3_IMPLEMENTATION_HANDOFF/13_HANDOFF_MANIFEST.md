@@ -1,7 +1,7 @@
 # 13 — HANDOFF MANIFEST
 
 **Pacote:** `Spec/Plan-V3/output/QWEN_GLM_5_3_IMPLEMENTATION_HANDOFF/`
-**Versão:** 2.1 (Plan-V3 — TECHNICAL BUILD READINESS PATCH + PORTABILITY PATCH — 2026-08-17; anterior: 1.2 legacy recovery)
+**Versão:** 2.2 (Plan-V3 — TECHNICAL BUILD READINESS PATCH + PORTABILITY PATCH + JOB ON IMAGE DIRECTORY CLARIFICATION — 2026-08-17; anterior: 2.1 portability)
 **Design baseline:** `Design-Reference/portal-dmo-design-final/` (commit ref `3b23e30bfc4e33845d9cc708e3bcbd703dac0aa0`)
 **Codificação:** UTF-8 em todos os ficheiros
 **Estado:** Plan-V3 aprovado para implementação — autoridade de implementação para a fresh build.
@@ -21,23 +21,23 @@ Execution provenance files: 1   (PROMPT.md — prompt literal da execução Plan
 |---|---|---:|---:|---:|---|
 | 1 | `00_START_HERE.md` | Entrada, natureza do programa, contratos estruturais, precedência | 159 | 11.136 | `B26BEDC43002F334CC73FDCCB6D868A723169F22D254C61EB038F4A627380DAD` |
 | 2 | `01_SOURCE_AUTHORITY_REGISTER.md` | Fontes, hashes, cobertura, autoridade (+ legacy recovery §8) | 181 | 17.415 | `8C6C45B0CD0E9D383910625C43A53F608C011E6D239AEB806A4DB248F13FA632` |
-| 3 | `02_DECISIONS_CONTRADICTIONS_AND_OPEN_QUESTIONS.md` | Decisões UD/TD (incl. TD-25..33 legacy recovery e §3.35 PV-01..PV-13 Plan-V3), C1–C32, AB, DS, rejeições | 529 | 48.765 | `140BC64B1D90EFF62E2981AEFF2BB30F61FA89ECB5F037258AB4ECBE76C28E4F` |
+| 3 | `02_DECISIONS_CONTRADICTIONS_AND_OPEN_QUESTIONS.md` | Decisões UD/TD (incl. TD-23 clarif. diretório imagem, TD-25..33 legacy recovery e §3.35 PV-01..PV-13 Plan-V3), C1–C32, AB, DS, rejeições | 558 | 51.207 | `79AF6BB351EE88E37CAB1D3BE521B5EFB4D9A51219A309C0FCC249F6BDC38942` |
 | 4 | `03_TARGET_MODULAR_ARCHITECTURE.md` | Arquitetura modular alvo, ownership, contratos lookup/auditoria, build contract Plan-V3 (§12–18) | 268 | 16.165 | `CEE58E9981FCE896B47FEFDB6AA90E35061420BAA99949CD6621FE0CFE62A23A` |
 | 5 | `04_IDENTITY_ACCESS_AND_ADMIN_SPEC.md` | Identidade, acesso, matriz 18 cenários, Admin + Auditoria | 172 | 13.645 | `DDB5D209BE80206C691D12A10BD8CA385B642EC689560A4DD29D643ECF5E08F4` |
 | 6 | `05_SHELL_NAVIGATION_AND_ROUTING_SPEC.md` | Shell única, tabs, landing Job On, deep links | 105 | 6.222 | `4A23C324E8D3EA460F211959F50F56A503861091FDA8FED87AA17FCE89BCF373` |
-| 7 | `06_DATA_BACKEND_AND_SECURITY_SPEC.md` | Schema alvo (job_on*, audit_events), RLS, concorrência, servidor/local, migrations/schema_migrations/CLI/PDF (§12–17) | 286 | 19.562 | `DBF79464D0D62947A525F5374BDE071767337E3E125472F5F1ED755B22714ED0` |
-| 8 | `07_DESIGN_SYSTEM_AND_COMPONENT_ARCHITECTURE.md` | Tokens v2.7, componentes (incl. novos), Calendar único, a11y; sem shortcuts funcionais | 151 | 11.907 | `95677FEF025F21270AE43B81957CE19FA439C16AF6F0454F58B1F1EEBFE05F7B` |
+| 7 | `06_DATA_BACKEND_AND_SECURITY_SPEC.md` | Schema alvo (job_on*, audit_events), RLS, concorrência, servidor/local, imagem Job On diretório local, migrations/schema_migrations/CLI/PDF (§12–17) | 296 | 20.577 | `4888A9516D02C5A109AE7BF0D8A5B11AE57C4D4C12D0A71701BEEF958791602F` |
+| 8 | `07_DESIGN_SYSTEM_AND_COMPONENT_ARCHITECTURE.md` | Tokens v2.7, componentes (incl. novos; Local Directory Selector reutilizado p/ imagem Job On), Calendar único, a11y; sem shortcuts funcionais | 157 | 12.480 | `CA06EC5D0D0A1A696BAC85FAADBC4EEE805FB9FE83E7D000D03CE737E157BA87` |
 | 9 | `08_MIGRATION_CUTOVER_AND_ROLLBACK_SPEC.md` | Dados, cutover (Job On primeiro), rollback, provenance do default, execução técnica §8 | 87 | 6.371 | `8BB1FF1B0BD6E942D539CECBF1C963A03639F082D91ECEA85CC328E3BEC59BD9` |
-| 10 | `09_TEST_QUALITY_AND_ACCEPTANCE_SPEC.md` | Testes (auditoria, contexto Job On), 18 cenários, testes determinísticos §9, contrato técnico §10 | 173 | 10.863 | `77696BAA7719DE9580BC1370A2DA5B258B8500CC616D6205BDB4DB2F3E54E596` |
-| 11 | `10_MASTER_IMPLEMENTATION_ROADMAP.md` | Unidades U-01..U-23 (incl. U-23 auditoria), gates A–J, build contract (U-01/U-02) e deploys (U-22) | 310 | 20.067 | `88E760833B062905E4EF5379CE5895D2DC34A6E8C8CFEE5D530A361AE5DADD02` |
+| 10 | `09_TEST_QUALITY_AND_ACCEPTANCE_SPEC.md` | Testes (auditoria, contexto Job On), 18 cenários, testes determinísticos §9, contrato técnico §10 (incl. imagem Job On dir.) | 182 | 11.633 | `7EA5CF5517386952704A42EFAFBF3E6330546310CBBEE85AA68924595C1F6ABC` |
+| 11 | `10_MASTER_IMPLEMENTATION_ROADMAP.md` | Unidades U-01..U-23 (incl. U-13 imagem dir. Job On; U-23 auditoria), gates A–J, build contract (U-01/U-02) e deploys (U-22) | 315 | 20.513 | `6762BA3F8C821BF5AA97395108C8B9F0222AC55DA422B6DE18FADF38C11D9FC5` |
 | 12 | `11_GLM_5_3_MASTER_IMPLEMENTATION_PROMPT.md` | Prompt final (precedência corrigida; keyboard rule; legacy recovery; portability; model-independent; TECHNICAL BUILD CONTRACT) | 211 | 14.427 | `AC8183823DB2144B98A204AEBA39670A3B793D9F301333B746133E382134BC1E` |
-| 13 | `12_REQUIREMENT_TRACEABILITY_MATRIX.md` | Todos os IDs de requisito + decisões UD/TD/DS/NC + PV-01..PV-07 | 159 | 12.369 | `550B38EAA23A15968A5420EB0643EFAECC2ACED9008A682F88A843D2FB912D9E` |
+| 13 | `12_REQUIREMENT_TRACEABILITY_MATRIX.md` | Todos os IDs de requisito + decisões UD/TD/DS/NC + PV-01..PV-07 (TD-23 dir. imagem) | 159 | 12.499 | `C9553D4171315D867EE81C98CB890C9EA8823162FCEA183017938813759A679F` |
 | 14 | `modules/00_MODULE_CATALOG.md` | Catálogo canónico (jobon primeiro; ferramentas.configure) | 77 | 6.119 | `B958EDB7C3A837EE462A77FB6355F60FE7B4B57D1D20CD502375E685FAED3DAB` |
 | 15 | `modules/01_BOQUILHAS_SPEC.md` | Boquilhas (20→25; rejeição legacy D registada) | 138 | 8.708 | `6E9F4EC2EACD264DCE3F1DCAAE1E23B633A9018A43EDBA58D1B87A6CFB28E6DE` |
 | 16 | `modules/02_CONTROLO_SPEC.md` | Controlo (área/domínio funcional; filhos atribuíveis) | 43 | 2.386 | `6E4665202C7B0BE3AE0F547B998E0EA2133367574DD8A948E8A96CFB72B72D27` |
 | 17 | `modules/03_PESO_SPEC.md` | Peso (densidades TD-25; volumes TD-28; comparações TD-29/30; lote CM TD-26) | 185 | 12.989 | `208D9263C1F8AE1D8242C5445F5C93CEA732E376335ABB513421F127A9414477` |
 | 18 | `modules/04_PEGAMENTOS_SPEC.md` | Pegamentos (regras TD-32; Job On obrigatório; PDF local) | 134 | 8.163 | `A859695EDCDEA356118064E553FDA82AF4528E2D9D8B71F06D655D37AC3A84C8` |
-| 19 | `modules/05_JOB_ON_SPEC.md` | Job On (data model; lifecycle/ativo TD-27; landing) | 182 | 13.590 | `37D759CF969DF8FEE78CA29EF5A6A20BFC0A003757D395499D255857407A3786` |
+| 19 | `modules/05_JOB_ON_SPEC.md` | Job On (data model; imagem por revisão — diretório local File System Access; lifecycle/ativo TD-27; landing) | 208 | 15.638 | `BC11B90A48BA439B0281F9D58A9072199696748153249585A3028111914D5091` |
 | 20 | `modules/06_FERRAMENTAS_CM_MF_SPEC.md` | Ferramentas CM/MF (ferramentas.configure; identidade TD-26) | 125 | 8.014 | `A0B5D4A0D863FE1C181B63B57D6DD9437773E120D134FD8ED99553E0E413C219` |
 | 21 | `modules/07_ARMAZEM_SPEC.md` | Armazém (posição 1:1; relação Job On) | 97 | 6.218 | `534CE486CE7459A57CB0A3EBBDC881E481377C377F2D50A409F3235387B5EEAA` |
 | 22 | `modules/08_REPARACAO_INTERNA_SPEC.md` | Reparação interna (registo rápido; correção auditável) | 91 | 5.117 | `3BB153443918D985F3CBCCB49B5CF1AD704C30E6A6348F7A43C7E7EF96BC5596` |
@@ -100,6 +100,19 @@ Não alterados (15): `01_SOURCE_AUTHORITY_REGISTER.md`, `04_IDENTITY…md`, `05_
    e os nomes canónicos históricos (ex.: `11_GLM_5_3_MASTER_IMPLEMENTATION_PROMPT.md` e a diretoria
    `QWEN_GLM_5_3_IMPLEMENTATION_HANDOFF`) são identificadores estáveis/provenance e foram mantidos.
    Sem alterações funcionais/de negócio.
+10. **JOB ON IMAGE DIRECTORY CLARIFICATION** (2026-08-17; OWNER TECHNICAL DECISION / CLARIFICATION):
+    fechado o MINOR de `06_DATA §9` (substituição da leitura de "storage sim" por object storage). O
+    modelo aprovado é a **ligação/seleção do diretório local da imagem** do Job On via **File System
+    Access API** (cliente/browser-only); `image_asset_id` é **associação/identificador lógico estável**
+    da revisão, não exigência de Supabase Storage; **sem binário de imagem no PostgreSQL**, **sem
+    imagem do Job On no filesystem do Render**, IndexedDB **apenas** com `FileSystemDirectoryHandle`
+    (nunca dados de domínio); a UI expõe "Ligar diretório da imagem"; attach/replace/remove
+    auditáveis; permissão perdida → religar/reautorizar (registo do Job On intacto); ações seguem
+    `jobon.edit`. Documentos materialmente alterados nesta clarificação:
+    `02_DECISIONS…md` (TD-23), `modules/05_JOB_ON_SPEC.md`, `06_DATA_BACKEND_AND_SECURITY_SPEC.md`,
+    `07_DESIGN_SYSTEM…md`, `09_TEST_QUALITY…md`, `10_MASTER_IMPLEMENTATION_ROADMAP.md`,
+    `12_REQUIREMENT_TRACEABILITY_MATRIX.md`, `13_HANDOFF_MANIFEST.md` (+ `V3.md` regenerado e
+    `MANIFEST.md` agregado). `FUNCTIONAL / BUSINESS CHANGES: 0`. Sem Plan-V4.
 
 ## 5. Readiness
 
