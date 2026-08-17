@@ -88,9 +88,9 @@ An auxiliary convenience document was added for reading. It is **not** part of
 the 26-file Qwen output and does not modify it.
 
 - Consolidated convenience document: `Spec/Plan-V3/V3.md`
-  - Lines: reported in commit 2
-  - Bytes: reported in commit 2
-  - SHA-256: reported in commit 2
+  - Lines: 4,511
+  - Bytes: 307,754
+  - SHA-256: `8D1E14912FB34B0DD6B3CBE974C1843E7B459F657C9939A9A02C1E8ED4BBEC10`
 
 The file hashes and counts above describe only the original Qwen output and are
 unchanged.
