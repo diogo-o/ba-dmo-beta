@@ -92,7 +92,7 @@ estão registadas em `02_DECISIONS_CONTRADICTIONS_AND_OPEN_QUESTIONS.md` (DESIGN
 | `Spec/05-repairs.md` | 24.534 | `5FE00D162AF1AE3A` | PROVENANCE ONLY (modelo no merged §7/§8) | LEGACY repair/saldo BQ |
 | `Spec/06-persistence.md` | 26.559 | `218F913DC080C963` | PROVENANCE ONLY | LEGACY storage (removido, C28) |
 | `Spec/07.md` / `08.md` / `09.md` | 39.671 / 38.166 / 33.669 | `96995E2B…` / `8FED580B…` / `32857393…` | PROVENANCE ONLY | LEGACY UI/eventos/regras escondidas BQ |
-| `Spec/autonomous-implementation.md` | 6.240 | `A40D407D1BA7E58D` | FULL | Processo legacy do Codex (não vinculativo para o GLM) |
+| `Spec/autonomous-implementation.md` | 6.240 | `A40D407D1BA7E58D` | FULL | Processo legacy do Codex (não vinculativo para a implementação) |
 | `Spec/database/migrations/001_identity.sql` | 1.409 | `0046AA82BA40D247` | FULL | MIGRATION FAMILY A |
 | `Spec/database/migrations/002_bq_core.sql` | 6.605 | `67897AA96D8DB3B9` | FULL | FAMILY A |
 | `Spec/database/migrations/003_peso_core.sql` | 6.852 | `17BD872F93CEC804` | FULL | FAMILY A |
@@ -104,7 +104,7 @@ estão registadas em `02_DECISIONS_CONTRADICTIONS_AND_OPEN_QUESTIONS.md` (DESIGN
 Nota sobre `Spec/src`: o código é evidência do ramo production-cloud (392 testes unitários
 reportados em `99_CURRENT_STATE.md`). Os serviços `BoquilhasService`, `PesoService`, `AdminService`,
 `WeightCalculator`/`ControlValidator` e repositórios Dapper confirmam os contratos das specs;
-o GLM não deve reutilizá-los automaticamente — ver `08_MIGRATION_CUTOVER_AND_ROLLBACK_SPEC.md`.
+o implementation agent não deve reutilizá-los automaticamente — ver `08_MIGRATION_CUTOVER_AND_ROLLBACK_SPEC.md`.
 
 ## 4. Baseline v2 — `ba-dmo-v2/`
 

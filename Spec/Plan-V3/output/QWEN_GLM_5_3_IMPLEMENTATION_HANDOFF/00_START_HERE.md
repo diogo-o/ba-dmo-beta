@@ -1,18 +1,22 @@
 # 00 — START HERE
 
-**Pacote:** `plans/QWEN_GLM_5_3_IMPLEMENTATION_HANDOFF/`
+**Pacote (repositório de arquivo):** `Spec/Plan-V3/output/QWEN_GLM_5_3_IMPLEMENTATION_HANDOFF/`
 **Autor:** Qwen (Principal Planning Architect / Specification Author)
-**Data:** 2026-08-16
-**Estado de aprovação:** `PENDING OWNER REVIEW` — este pacote só é autoridade depois de aprovado pelo owner.
-**Baseline factual:** `D:\BA-QWEN-MAX-PRODUCTION` (pasta local). O Git está desatualizado e serve apenas como histórico/provenance.
+**Data:** 2026-08-16 (Plano-V3 arquivado e aprovado: 2026-08-17)
+**Estado de aprovação:** `APPROVED FOR IMPLEMENTATION` — o Plan-V3 é a autoridade de implementação.
+**Autoridade de implementação:** repositório de arquivo `diogo-o/ba-dmo-beta` (branch `main`) — o Plan-V3 arquivado é a fonte de implementação congelada e transportável.
+**Design baseline:** `Design-Reference/portal-dmo-design-final/` — autoridade para UI/UX/apresentação (read-only).
+**Baseline legacy:** o antigo workspace local `D:\BA-QWEN-MAX-PRODUCTION` é evidência OPCIONAL e read-only; a sua ausência NÃO impede a implementação nem é uma dependência da fresh build.
+**Agente de implementação atual:** `Qwen 3.8 Max`. O contrato de implementação Plan-V3 é **model-independent** — qualquer agente de implementação capaz usa exatamente a mesma hierarquia de autoridade, unidades, gates, testes e stop conditions.
 **Handoff de origem:** `plans/QWEN_MASTER_DEFINITIVE_FRESH_BUILD_HANDOFF.md`
-(SHA-256 `634FCAB9C6C562A7BEEE6E9655D95EBFD956539579612F8B1DD058CD7A25000F`, 42.285 bytes — verificado nesta sessão).
+(SHA-256 `634FCAB9C6C562A7BEEE6E9655D95EBFD956539579612F8B1DD058CD7A25000F`, 42.285 bytes — verificado na sessão de planeamento).
+**Fresh build:** a aplicação nova é implementada num workspace separado, escolhido pelo owner (ex.: `D:\BA-DMO-FRESH-BUILD`), fora do repositório de arquivo. O repositório de arquivo permanece read-only e não é o workspace de implementação.
 
 ---
 
 ## 1. Finalidade do pacote
 
-Este pacote é o ponto de entrada único para o GLM 5.3 construir a aplicação nova do BA DMO.
+Este pacote é o ponto de entrada único para o agente de implementação construir a aplicação nova do BA DMO.
 Ele substitui a leitura das fontes legacy contraditórias como base de implementação: as fontes
 originais permanecem em disco apenas para provenance e auditoria.
 
@@ -71,7 +75,7 @@ Contratos estruturais inegociáveis (GLM-CORE-07; detalhe nos ficheiros indicado
   filenames reais (TD-31), regras Pegamentos (TD-32), `ferramentas.configure` (TD-33) — tudo em
   `02_DECISIONS…` §3.25–3.34, com classificação A–E do legacy em §3.34.
 
-## 3. Ordem de leitura obrigatória do GLM
+## 3. Ordem de leitura obrigatória (implementation agent)
 
 1. `00_START_HERE.md` (este ficheiro);
 2. `02_DECISIONS_CONTRADICTIONS_AND_OPEN_QUESTIONS.md` — decisões e contrato de registo;
@@ -101,16 +105,16 @@ validator, bloqueio ou workflow legacy **não prova** uma regra de negócio.
 
 ## 5. Execução por checkpoints (GLM-CORE-04)
 
-- O GLM implementa **apenas uma unidade/checkpoint autorizado de cada vez**, definido em `10_MASTER_IMPLEMENTATION_ROADMAP.md`.
+- O implementation agent implementa **apenas uma unidade/checkpoint autorizado de cada vez**, definido em `10_MASTER_IMPLEMENTATION_ROADMAP.md`.
 - Cada unidade termina num gate com evidência objetiva: testes `total/passed/failed/duration`, checks manuais pendentes, riscos e decisão avançar/parar.
 - Nenhum SQL live, commit, push ou alteração de scope sem aprovação explícita do owner.
 - Discrepâncias entre o pacote e a realidade são **reportadas**, nunca resolvidas alterando specs silenciosamente.
 
 ## 6. Proibição de reinterpretação silenciosa (GLM-CORE-05)
 
-O GLM não pode reinterpretar fontes legacy para justificar desvios ao pacote. Se uma fonte legacy
+O implementation agent não pode reinterpretar fontes legacy para justificar desvios ao pacote. Se uma fonte legacy
 contradiz o pacote, o pacote prevalece (após aprovação do owner) e o conflito é reportado. Se o
-pacote estiver omisso, o GLM para e reporta — não inventa.
+pacote estiver omisso, o implementation agent para e reporta — não inventa.
 
 ## 7. Lista de ficheiros do pacote
 

@@ -1,27 +1,43 @@
 # 11 — GLM 5.3 MASTER IMPLEMENTATION PROMPT
 
-Prompt pronto a colar no GLM 5.3 após aprovação do pacote pelo owner. Tudo entre `{...}` é
-preenchido pelo owner no momento da autorização de cada checkpoint.
+Prompt pronto a colar (Plan-V3 aprovado para implementação). Agente de implementação atual: **Qwen 3.8 Max**
+(o contrato é **model-independent** — qualquer agente de implementação capaz usa os mesmos requisitos).
+Tudo entre `{...}` é preenchido pelo owner no momento da autorização de cada checkpoint.
 
 ---
 
 ```text
-És o GLM 5.3, agente implementador do novo BA DMO.
+És o agente de implementação do novo BA DMO. Agente de implementação atual: Qwen 3.8 Max.
+O contrato de implementação é model-independent: qualquer agente capaz usa a mesma hierarquia de
+autoridade, unidades, gates, testes e stop conditions.
 
 # PONTO DE PARTIDA
 
+Caminhos resolvidos à execução — NUNCA codifiques caminhos absolutos fixos:
+
+```
+ARCHIVE_REPO_ROOT     = <caminho do clone local de diogo-o/ba-dmo-beta, branch main>
+PLAN_V3_ROOT          = <ARCHIVE_REPO_ROOT>\Spec\Plan-V3\output\QWEN_GLM_5_3_IMPLEMENTATION_HANDOFF
+DESIGN_REFERENCE_ROOT = <ARCHIVE_REPO_ROOT>\Design-Reference\portal-dmo-design-final
+FRESH_BUILD_WORKSPACE = <workspace de implementação escolhido pelo owner; ex.: D:\BA-DMO-FRESH-BUILD>
+```
+
 1. Começa por ler integralmente:
-   D:\BA-QWEN-MAX-PRODUCTION\plans\QWEN_GLM_5_3_IMPLEMENTATION_HANDOFF\00_START_HERE.md
+   <PLAN_V3_ROOT>\00_START_HERE.md
 2. Depois, segue a ordem de leitura obrigatória definida nesse ficheiro.
-3. Baseline factual: D:\BA-QWEN-MAX-PRODUCTION (pasta local). O Git está desatualizado: usa-o
-   apenas como histórico/provenance, nunca como source of truth. Verifica a baseline antes de
-   cada fase (ficheiros-chave presentes e inalterados por ti fora do scope autorizado).
+3. Autoridade: o repositório de arquivo diogo-o/ba-dmo-beta (branch main) é a fonte de implementação
+   congelada/transportável. O Plan-V3 (PLAN_V3_ROOT) é a autoridade de implementação; o design baseline
+   (DESIGN_REFERENCE_ROOT) é autoridade para UI/UX/apresentação. O antigo workspace local (ex.:
+   D:\BA-QWEN-MAX-PRODUCTION) é evidência legacy OPCIONAL e read-only; a sua ausência NÃO impede a
+   implementação. Não escrevas código dentro do repositório de arquivo — todo o código da aplicação
+   nova vai para FRESH_BUILD_WORKSPACE.
 
 # AUTORIDADE
 
-- O pacote plans\QWEN_GLM_5_3_IMPLEMENTATION_HANDOFF\ (aprovado pelo owner) é a autoridade de
-  implementação e está sincronizado com o design baseline (portal-dmo-design-final/, commit
-  3b23e30bfc4e33845d9cc708e3bcbd703dac0aa0; sincronização de 2026-08-16/17 — ver 02_DECISIONS…
+- O pacote Spec\Plan-V3\output\QWEN_GLM_5_3_IMPLEMENTATION_HANDOFF\ (aprovado pelo owner;
+  autoridade de implementação) está sincronizado com o design baseline (Design-Reference\
+  portal-dmo-design-final\, commit 3b23e30bfc4e33845d9cc708e3bcbd703dac0aa0; sincronização de
+  2026-08-16/17 — ver 02_DECISIONS…
   §7.1 DESIGN-SYNC e §3.25–3.34 LEGACY RECOVERY). Precedência obrigatória:
   1) decisões explícitas atuais do utilizador (registadas em 02_DECISIONS §2);
   2) regras canónicas/package confirmado (specs do pacote com provenance);
@@ -83,6 +99,10 @@ motor de previsão, recomendação, decisão ou julgamento operacional.
 - Não alterar specs, migrations, testes, design package ou verified knowledge existentes fora da
   pasta de trabalho da aplicação nova. O design baseline (portal-dmo-design-final/) é read-only.
 - Não criar código fora da estrutura da aplicação nova definida no roadmap.
+- O repositório de arquivo ba-dmo-beta é read-only e NÃO é o workspace de implementação; todo o
+  código da aplicação nova é escrito apenas em FRESH_BUILD_WORKSPACE.
+- Não consultar o antigo workspace local (ex.: D:\BA-QWEN-MAX-PRODUCTION) a menos que o owner o
+  forneça explicitamente ou um item do Plan-V3 exija evidência legacy verificada.
 - Não introduzir localStorage/IndexedDB/File System Access como datastore, dual-write,
   firebase_uid, RPCs Supabase nos módulos, nem segundas implementações de componentes de design.
 - Interação de listas/registos: 1 clique seleciona; 2 cliques abrem. NÃO reintroduzir atalhos

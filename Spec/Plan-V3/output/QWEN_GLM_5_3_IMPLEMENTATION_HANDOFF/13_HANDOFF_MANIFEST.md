@@ -1,10 +1,10 @@
 # 13 — HANDOFF MANIFEST
 
-**Pacote:** `plans/QWEN_GLM_5_3_IMPLEMENTATION_HANDOFF/`
-**Versão:** 2.0 (Plan-V3 — TECHNICAL BUILD READINESS PATCH — 2026-08-17; anterior: 1.2 legacy recovery)
-**Design baseline:** `portal-dmo-design-final/` (commit ref `3b23e30bfc4e33845d9cc708e3bcbd703dac0aa0`)
+**Pacote:** `Spec/Plan-V3/output/QWEN_GLM_5_3_IMPLEMENTATION_HANDOFF/`
+**Versão:** 2.1 (Plan-V3 — TECHNICAL BUILD READINESS PATCH + PORTABILITY PATCH — 2026-08-17; anterior: 1.2 legacy recovery)
+**Design baseline:** `Design-Reference/portal-dmo-design-final/` (commit ref `3b23e30bfc4e33845d9cc708e3bcbd703dac0aa0`)
 **Codificação:** UTF-8 em todos os ficheiros
-**Estado:** Plano-V3 aplicado — entregue para revisão do owner (autoridade após aprovação).
+**Estado:** Plan-V3 aprovado para implementação — autoridade de implementação para a fresh build.
 
 ## 0. Contagem do package (Plano-V3)
 
@@ -19,8 +19,8 @@ Execution provenance files: 1   (PROMPT.md — prompt literal da execução Plan
 
 | # | Ficheiro | Finalidade | Linhas | Bytes | SHA-256 |
 |---|---|---:|---:|---:|---|
-| 1 | `00_START_HERE.md` | Entrada, natureza do programa, contratos estruturais, precedência | 155 | 10.096 | `4EB2FDD3EDDA1A29370E7E3CB7ED544F38DD280E9E44779CA372D3FE86BE48B4` |
-| 2 | `01_SOURCE_AUTHORITY_REGISTER.md` | Fontes, hashes, cobertura, autoridade (+ legacy recovery §8) | 181 | 17.386 | `11DC6F7FDFD53C18474355AF0E7FEFCA91474DA1B8CBEF9B193D9576638976A8` |
+| 1 | `00_START_HERE.md` | Entrada, natureza do programa, contratos estruturais, precedência | 159 | 11.136 | `B26BEDC43002F334CC73FDCCB6D868A723169F22D254C61EB038F4A627380DAD` |
+| 2 | `01_SOURCE_AUTHORITY_REGISTER.md` | Fontes, hashes, cobertura, autoridade (+ legacy recovery §8) | 181 | 17.415 | `8C6C45B0CD0E9D383910625C43A53F608C011E6D239AEB806A4DB248F13FA632` |
 | 3 | `02_DECISIONS_CONTRADICTIONS_AND_OPEN_QUESTIONS.md` | Decisões UD/TD (incl. TD-25..33 legacy recovery e §3.35 PV-01..PV-13 Plan-V3), C1–C32, AB, DS, rejeições | 529 | 48.765 | `140BC64B1D90EFF62E2981AEFF2BB30F61FA89ECB5F037258AB4ECBE76C28E4F` |
 | 4 | `03_TARGET_MODULAR_ARCHITECTURE.md` | Arquitetura modular alvo, ownership, contratos lookup/auditoria, build contract Plan-V3 (§12–18) | 268 | 16.165 | `CEE58E9981FCE896B47FEFDB6AA90E35061420BAA99949CD6621FE0CFE62A23A` |
 | 5 | `04_IDENTITY_ACCESS_AND_ADMIN_SPEC.md` | Identidade, acesso, matriz 18 cenários, Admin + Auditoria | 172 | 13.645 | `DDB5D209BE80206C691D12A10BD8CA385B642EC689560A4DD29D643ECF5E08F4` |
@@ -29,8 +29,8 @@ Execution provenance files: 1   (PROMPT.md — prompt literal da execução Plan
 | 8 | `07_DESIGN_SYSTEM_AND_COMPONENT_ARCHITECTURE.md` | Tokens v2.7, componentes (incl. novos), Calendar único, a11y; sem shortcuts funcionais | 151 | 11.907 | `95677FEF025F21270AE43B81957CE19FA439C16AF6F0454F58B1F1EEBFE05F7B` |
 | 9 | `08_MIGRATION_CUTOVER_AND_ROLLBACK_SPEC.md` | Dados, cutover (Job On primeiro), rollback, provenance do default, execução técnica §8 | 87 | 6.371 | `8BB1FF1B0BD6E942D539CECBF1C963A03639F082D91ECEA85CC328E3BEC59BD9` |
 | 10 | `09_TEST_QUALITY_AND_ACCEPTANCE_SPEC.md` | Testes (auditoria, contexto Job On), 18 cenários, testes determinísticos §9, contrato técnico §10 | 173 | 10.863 | `77696BAA7719DE9580BC1370A2DA5B258B8500CC616D6205BDB4DB2F3E54E596` |
-| 11 | `10_MASTER_IMPLEMENTATION_ROADMAP.md` | Unidades U-01..U-23 (incl. U-23 auditoria), gates A–J, build contract (U-01/U-02) e deploys (U-22) | 310 | 20.050 | `81E94B3EFE8D069641F0FB055AD09230DF7F8184D162D889C91E4BCA7E9AD938` |
-| 12 | `11_GLM_5_3_MASTER_IMPLEMENTATION_PROMPT.md` | Prompt final (precedência corrigida; keyboard rule; legacy recovery; TECHNICAL BUILD CONTRACT) | 191 | 12.976 | `3166BF36A40DA2F64D75351D7C5773C2C58CA1C4ACDB87E6FFCD88CC6F50DA54` |
+| 11 | `10_MASTER_IMPLEMENTATION_ROADMAP.md` | Unidades U-01..U-23 (incl. U-23 auditoria), gates A–J, build contract (U-01/U-02) e deploys (U-22) | 310 | 20.067 | `88E760833B062905E4EF5379CE5895D2DC34A6E8C8CFEE5D530A361AE5DADD02` |
+| 12 | `11_GLM_5_3_MASTER_IMPLEMENTATION_PROMPT.md` | Prompt final (precedência corrigida; keyboard rule; legacy recovery; portability; model-independent; TECHNICAL BUILD CONTRACT) | 211 | 14.427 | `AC8183823DB2144B98A204AEBA39670A3B793D9F301333B746133E382134BC1E` |
 | 13 | `12_REQUIREMENT_TRACEABILITY_MATRIX.md` | Todos os IDs de requisito + decisões UD/TD/DS/NC + PV-01..PV-07 | 159 | 12.369 | `550B38EAA23A15968A5420EB0643EFAECC2ACED9008A682F88A843D2FB912D9E` |
 | 14 | `modules/00_MODULE_CATALOG.md` | Catálogo canónico (jobon primeiro; ferramentas.configure) | 77 | 6.119 | `B958EDB7C3A837EE462A77FB6355F60FE7B4B57D1D20CD502375E685FAED3DAB` |
 | 15 | `modules/01_BOQUILHAS_SPEC.md` | Boquilhas (20→25; rejeição legacy D registada) | 138 | 8.708 | `6E9F4EC2EACD264DCE3F1DCAAE1E23B633A9018A43EDBA58D1B87A6CFB28E6DE` |
@@ -87,13 +87,25 @@ Não alterados (15): `01_SOURCE_AUTHORITY_REGISTER.md`, `04_IDENTITY…md`, `05_
 5. `net8.0`/`net9.0`/“ASP.NET Core 8+”/`win-x64`/`PublishSingleFile`/Windows-deploy como **contrato
    atual** removidos; mantidos apenas como historical provenance onde aplicável;
 6. UTF-8 verificado em todos os ficheiros; zero mojibake; zero temporários;
-7. Nenhum ficheiro fora de `plans/QWEN_GLM_5_3_IMPLEMENTATION_HANDOFF/` foi alterado; design, app e
+7. Nenhum ficheiro fora de `Spec/Plan-V3/output/QWEN_GLM_5_3_IMPLEMENTATION_HANDOFF/` foi alterado; design, app e
    legacy tratados como read-only; nenhum código de aplicação implementado.
+8. **PLAN-V3 PORTABILITY PATCH** (2026-08-17): `00_START_HERE.md` e `11_GLM_5_3_MASTER_IMPLEMENTATION_PROMPT.md`
+   corrigidos para remover a dependência do workspace local antigo (`D:\BA-QWEN-MAX-PRODUCTION`) e do estado
+   `PENDING OWNER REVIEW`; a autoridade de implementação passou a ser explicitamente o repositório de arquivo
+   `diogo-o/ba-dmo-beta` (branch `main`), com o design baseline como autoridade de UI/UX e a fresh build em
+   workspace separado. Sem alterações funcionais/de negócio (`FUNCTIONAL / BUSINESS CHANGES: 0`).
+9. **MODEL-INDEPENDENT IMPLEMENTATION CONTRACT** (2026-08-17): o prompt mestre (`11`) e os documentos de
+   orientação (`00`, `10`) passaram de referências operacionais a "GLM 5.3" para "implementation agent"
+   (model-independent); agente de implementação atual: **Qwen 3.8 Max**. Os IDs de requisito `GLM-*`
+   e os nomes canónicos históricos (ex.: `11_GLM_5_3_MASTER_IMPLEMENTATION_PROMPT.md` e a diretoria
+   `QWEN_GLM_5_3_IMPLEMENTATION_HANDOFF`) são identificadores estáveis/provenance e foram mantidos.
+   Sem alterações funcionais/de negócio.
 
 ## 5. Readiness
 
-`READY FOR GLM 5.3` — o Plano-V3 está tecnicamente pronto para implementação **sem inferência
+`READY FOR IMPLEMENTATION (model-independent)` — o Plano-V3 está tecnicamente pronto para implementação **sem inferência
 material**: target `net10.0`, estrutura de 6 projetos, Dapper/Npgsql, Supabase boundary, migrations
 CLI (`schema_migrations`), bootstrap-admin CLI, Docker/Render/Linux, PDF em memória + File System
 Access export-only, IndexedDB directory-handle exception e no-debug-bypass estão explícitos no prompt
-mestre (`11`). Primeira unidade autorizada após aprovação do owner: **U-01**.
+mestre (`11`). Contrato model-independent; agente de implementação atual: Qwen 3.8 Max. Primeira
+unidade autorizada após aprovação do owner: **U-01**.

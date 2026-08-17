@@ -90,6 +90,23 @@ For convenient reading, the complete Plan-V3 has also been consolidated into:
 
 This document does not replace or modify the original 26-file snapshot.
 
+## Portability & Implementation Agent
+
+- **Portability:** Plan-V3 is clean-machine portable. It does not depend on the
+  old local workspace `D:\BA-QWEN-MAX-PRODUCTION`; that path (recorded above as
+  the historical planning source) is optional read-only legacy evidence only.
+- **Authority:** the archived repository `diogo-o/ba-dmo-beta` (branch `main`)
+  is the implementation authority; the design baseline
+  `Design-Reference/portal-dmo-design-final/` is authority for UI/UX.
+- **Implementation agent:** current agent is **Qwen 3.8 Max**. The Plan-V3
+  implementation contract is **model-independent** — the master implementation
+  prompt is directly usable by Qwen 3.8 Max and by any capable coding agent,
+  using the same authority hierarchy, units, gates, tests and stop conditions.
+  Stable `GLM-*` requirement identifiers and canonical historical filenames
+  (e.g. `11_GLM_5_3_MASTER_IMPLEMENTATION_PROMPT.md`) are preserved.
+- **Fresh build:** built in a separate owner-selected workspace (e.g.
+  `D:\BA-DMO-FRESH-BUILD`), never inside the archive repository.
+
 ## Preservation Rule
 
 Plan-V3 é um snapshot histórico independente.
@@ -99,3 +116,8 @@ Não alterar Plan-V1.
 Não alterar Plan-V2.
 
 Não alterar Plan-V3 depois de arquivado; futuras passagens serão Plan-V4, etc.
+
+Exceção registada: em 2026-08-17 foi aplicada uma correção autorizada
+in-place (portability + model-independent contract) ao Plan-V3 recém-arquivado,
+sem qualquer alteração funcional/de negócio (`FUNCTIONAL / BUSINESS CHANGES: 0`)
+e sem criar Plan-V4.

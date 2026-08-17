@@ -1,6 +1,6 @@
 # 10 — MASTER IMPLEMENTATION ROADMAP
 
-Execução faseada em unidades pequenas, recuperáveis e atribuíveis. O GLM implementa **apenas a
+Execução faseada em unidades pequenas, recuperáveis e atribuíveis. O implementation agent implementa **apenas a
 unidade autorizada** (GLM-CORE-04). Gates A–J conforme handoff §7. Formato por unidade: ID ·
 objetivo/outcome · autoridade · dependências · scope (ficheiros) · contratos afetados · trabalho ·
 proibições · impacto de dados · impacto de segurança · testes · acceptance · stop condition ·
